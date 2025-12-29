@@ -7,8 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\NiotechoneCQRS.Domain\NiotechoneCQRS.Domain.csproj" />
     <ProjectReference Include="..\NiotechoneCQRS.Infrastructure\NiotechoneCQRS.Infrastructure.csproj" />
+    <ProjectReference Include="..\NiotechoneCQRS.Utility\NiotechoneCQRS.Utility.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="User\Commands\" />
   </ItemGroup>
 
 </Project>
