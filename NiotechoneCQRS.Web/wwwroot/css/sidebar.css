@@ -1,0 +1,128 @@
+﻿/* ================= GLOBAL ================= */
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #f5f7fb;
+}
+
+/* ================= APP LAYOUT ================= */
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar {
+    width: 280px;
+    background: linear-gradient(180deg, #0f172a, #111827);
+    color: #fff;
+    transition: width 0.3s ease;
+    overflow: hidden;
+}
+
+    .sidebar.collapsed {
+        width: 72px;
+    }
+
+/* ================= SIDEBAR HEADER ================= */
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 16px 14px;
+    transition: all 0.3s ease;
+}
+
+/* COLLAPSED HEADER */
+.sidebar.collapsed .sidebar-header {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 14px;
+    padding-top: 16px;
+}
+
+/* ================= TOGGLE ================= */
+.sidebar-toggle {
+    width: 36px;
+    height: 36px;
+    background: #1f2937;
+    color: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.35);
+    margin-left: 18px;
+}
+
+/* ================= LOGO ================= */
+.logo {
+    width: 200px;
+    height: 44px;
+    background: #ffffff;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+/* LOGO COLLAPSED */
+.sidebar.collapsed .logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    margin-top: 2px;
+    margin-left: 14px;
+}
+
+/* ================= MENU ================= */
+.menu {
+    list-style: none;
+    padding: 8px 0;
+    margin: 0;
+}
+
+    .menu li {
+        margin: 6px 0;
+    }
+
+        .menu li a {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 22px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.2s ease;
+        }
+
+            .menu li a:hover,
+            .menu li.active a {
+                background: rgba(255,255,255,0.14);
+                color: #fff;
+                border-radius: 10px;
+            }
+
+    /* ICON */
+    .menu i {
+        width: 22px;
+        font-size: 16px;
+        text-align: center;
+    }
+
+/* COLLAPSED MENU */
+.sidebar.collapsed .menu li a {
+    justify-content: center;
+    padding: 14px 0;
+}
+
+/* HIDE TEXT */
+.sidebar.collapsed .menu span {
+    display: none;
+}
+
+/* ================= CONTENT ================= */
+.content {
+    flex: 1;
+    padding: 20px;
+}
