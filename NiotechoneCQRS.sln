@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36511.14 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NiotechoneCQRS.WebApi", "NiotechoneCQRS.WebApi\NiotechoneCQRS.WebApi.csproj", "{FBFB6684-DE3C-4633-B3F3-8626528D55B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NiotechoneCQRS.Application", "NiotechoneCQRS.Application\NiotechoneCQRS.Application.csproj", "{E856336A-C843-4DEE-979E-95B511A89D89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NiotechoneCQRS.Domain", "NiotechoneCQRS.Domain\NiotechoneCQRS.Domain.csproj", "{789E7E81-8D1A-474D-9F0D-99CA94F4057B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NiotechoneCQRS.Infrastructure", "NiotechoneCQRS.Infrastructure\NiotechoneCQRS.Infrastructure.csproj", "{F0E72588-E9F9-4D35-88D1-A3DBD07B444B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NiotechoneCQRS.Utility", "NiotechoneCQRS.Utility\NiotechoneCQRS.Utility.csproj", "{E25FCECC-DB52-4271-A601-31E631FE0360}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NiotechoneCQRS.Web", "NiotechoneCQRS.Web\NiotechoneCQRS.Web.csproj", "{4139B7CF-E7CB-46F4-A8A2-78AB19C5E9A0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBFB6684-DE3C-4633-B3F3-8626528D55B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBFB6684-DE3C-4633-B3F3-8626528D55B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBFB6684-DE3C-4633-B3F3-8626528D55B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBFB6684-DE3C-4633-B3F3-8626528D55B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E856336A-C843-4DEE-979E-95B511A89D89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E856336A-C843-4DEE-979E-95B511A89D89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E856336A-C843-4DEE-979E-95B511A89D89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E856336A-C843-4DEE-979E-95B511A89D89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{789E7E81-8D1A-474D-9F0D-99CA94F4057B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{789E7E81-8D1A-474D-9F0D-99CA94F4057B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{789E7E81-8D1A-474D-9F0D-99CA94F4057B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{789E7E81-8D1A-474D-9F0D-99CA94F4057B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0E72588-E9F9-4D35-88D1-A3DBD07B444B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0E72588-E9F9-4D35-88D1-A3DBD07B444B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0E72588-E9F9-4D35-88D1-A3DBD07B444B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0E72588-E9F9-4D35-88D1-A3DBD07B444B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E25FCECC-DB52-4271-A601-31E631FE0360}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E25FCECC-DB52-4271-A601-31E631FE0360}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E25FCECC-DB52-4271-A601-31E631FE0360}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E25FCECC-DB52-4271-A601-31E631FE0360}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4139B7CF-E7CB-46F4-A8A2-78AB19C5E9A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4139B7CF-E7CB-46F4-A8A2-78AB19C5E9A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4139B7CF-E7CB-46F4-A8A2-78AB19C5E9A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4139B7CF-E7CB-46F4-A8A2-78AB19C5E9A0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DC1B343E-6365-490D-9493-377DE6F431B8}
+	EndGlobalSection
+EndGlobal
