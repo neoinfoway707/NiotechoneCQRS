@@ -4,32 +4,175 @@ using NiotechoneCQRS.Domain.Interfaces;
 using NiotechoneCQRS.Infrastructure.Persistence.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NiotechoneCQRS.Infrastructure.Persistence.Repositories
+namespace NiotechoneCQRS.Infrastructure.Persistence.Repositories;
+
+public class UserRepository : IUserRepository
 {
-    public class UserRepository : IUserRepository
+    private readonly IDbConnectionFactory _connectionFactory;
+
+    public UserRepository(IDbConnectionFactory connectionFactory)
     {
-        private readonly IDbConnectionFactory _connectionFactory;
+        _connectionFactory = connectionFactory;
+    }
 
-        public UserRepository(IDbConnectionFactory connectionFactory)
-        {
-            _connectionFactory = connectionFactory;
-        }
+    public async Task<IList<User>> GetAllUsers(CancellationToken cancellationToken = default)
+    {
+        using var connection = _connectionFactory.CreateConnection();
 
-        public async Task<IList<User>> GetAllUsers(CancellationToken cancellationToken = default)
-        {
-            using var connection = _connectionFactory.CreateConnection();
-
-            const string sql = @"
+        const string sql = @"
                 SELECT *
                 FROM [User]";
 
-            var users = await connection.QueryAsync<User>(sql);
+        var users = await connection.QueryAsync<User>(sql);
 
-            return users.AsList();
+        return users.AsList();
+    }
+
+    public async Task<User?> GetUserByIdAsync(string id, CancellationToken cancellationToken = default)
+    {
+        const string sql = @"
+                SELECT *
+                FROM [User]
+                WHERE UserId = @UserId;
+            ";
+
+        using var connection = _connectionFactory.CreateConnection();
+
+        return await connection.QueryFirstOrDefaultAsync<User>(
+            sql,
+            new { UserId = id }
+        );
+    }
+
+    public async Task<bool> DeleteUserByIdAsync(string id, CancellationToken cancellationToken = default)
+    {
+        const string sql = @"
+                DELETE FROM [User]
+                WHERE UserId = @UserId;
+            ";
+        using var connection = _connectionFactory.CreateConnection();
+        var rowsAffected = await connection.ExecuteAsync(
+            sql,
+            new { UserId = id }
+        );
+        return rowsAffected > 0;
+    }
+
+    public async Task<bool> CreateUserAsync(User user, CancellationToken cancellationToken = default)
+    {
+        const string sql = @"
+                INSERT INTO [User] (FullName, UserRoleId, Address, CountryId, Email, Phone, Description, UserName, PasswordDecrypt,StatusId,CompanyId)
+                VALUES (@FullName, @UserRoleId, @Address, @CountryId, @Email, @Phone, @Description, @UserName, @PasswordDecrypt,@StatusId,@CompanyId);
+            ";
+        using var connection = _connectionFactory.CreateConnection();
+        var rowsAffected = await connection.ExecuteAsync(
+            sql,
+            new
+            {
+                FullName = user.FullName,
+                UserRoleId = user.UserRoleId,
+                Address = user.Address,
+                CountryId = user.CountryId,
+                Email = user.Email,
+                Phone = user.Phone,
+                Description = user.Description,
+                UserName = user.UserName,
+                PasswordDecrypt = user.Password,
+                StatusId = user.StatusId,
+                CompanyId = user.CompanyId
+            }
+        );
+        return rowsAffected > 0;
+    }
+    public async Task<bool> UpdateUserAsync(User user, CancellationToken cancellationToken)
+    {
+        var sql = @"
+        UPDATE [dbo].[User]
+        SET
+            FullName = @FullName,
+            UserRoleId = @UserRoleId,
+            CompanyId = @CompanyId,
+            Address = @Address,
+            CountryId = @CountryId,
+            Email = @Email,
+            Phone = @Phone,
+            Description = @Description,
+            UserName = @UserName,
+            StatusId = @StatusId
+            /**PASSWORD**/
+        WHERE UserId = @UserId;";
+
+        var parameters = new DynamicParameters(user); // Maps properties automatically if names match
+
+        if (!string.IsNullOrWhiteSpace(user.PasswordDecrypt))
+        {
+            sql = sql.Replace("/**PASSWORD**/", ", PasswordDecrypt = @Password");
+            parameters.Add("Password", user.PasswordDecrypt);
         }
+        else
+        {
+            sql = sql.Replace("/**PASSWORD**/", "");
+        }
+
+        using var connection = _connectionFactory.CreateConnection();
+        var rowsAffected = await connection.ExecuteAsync(
+            new CommandDefinition(
+                sql,
+                parameters,
+                cancellationToken: cancellationToken
+            )
+        );
+        return rowsAffected > 0;
+    }
+    public async Task<User?> IsUserValid(string email, string password, int? companyId)
+    {
+        const string sql = @"
+        SELECT TOP 1 *
+        FROM dbo.[User]
+        WHERE Email = @Email
+          AND PasswordDecrypt = @PasswordDecrypt
+          AND (@CompanyId IS NULL OR CompanyId = @CompanyId);
+    ";
+
+        using var connection = _connectionFactory.CreateConnection();
+
+        return await connection.QueryFirstOrDefaultAsync<User>(
+            sql,
+            new
+            {
+                Email = email,
+                PasswordDecrypt = password,
+                CompanyId = companyId
+            });
+    }
+
+
+
+
+    public async Task<bool> UpdateUserTokenAsync(long userId, string token, CancellationToken cancellationToken)
+    {
+        var sql = @"
+        UPDATE [dbo].[User]
+        SET
+            token = @token
+        WHERE UserId = @UserId;";
+
+        var parameters = new { UserId = userId, token = token };
+
+        using var connection = _connectionFactory.CreateConnection();
+        var rowsAffected = await connection.ExecuteAsync(
+            new CommandDefinition(
+                sql,
+                parameters,
+                cancellationToken: cancellationToken
+            )
+        );
+        return rowsAffected > 0;
     }
 }

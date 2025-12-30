@@ -117,6 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="LoginError" xml:space="preserve">
+    <value>Login Error</value>
+    <comment>Login Error</comment>
+  </data>
+  <data name="LoginSuccess" xml:space="preserve">
+    <value>Login Success</value>
+    <comment>Login Success</comment>
+  </data>
   <data name="Notfound" xml:space="preserve">
     <value>Not found</value>
   </data>
