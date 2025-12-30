@@ -2,13 +2,6 @@
 using NiotechoneCQRS.Domain.Entities;
 using NiotechoneCQRS.Domain.Interfaces;
 using NiotechoneCQRS.Infrastructure.Persistence.Data;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NiotechoneCQRS.Infrastructure.Persistence.Repositories;
 

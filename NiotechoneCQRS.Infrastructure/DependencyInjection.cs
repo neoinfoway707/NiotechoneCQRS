@@ -14,7 +14,7 @@ public static class DependencyInjection
     private static void ApplicationServiceConfigure(this IServiceCollection services)
     {
         services.AddScoped<IUserRepository, UserRepository>();
-
+        services.AddScoped<ICompanyRepository, CompanyRepository>();
     }
 }
 
