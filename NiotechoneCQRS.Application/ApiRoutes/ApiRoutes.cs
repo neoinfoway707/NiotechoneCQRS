@@ -8,5 +8,7 @@
         public const string Create = "create";
         public const string Update = "update/id";
         public const string Login = "login";
+
+        public const string GetAllCompanies = "get-all-companies";
     }
 }

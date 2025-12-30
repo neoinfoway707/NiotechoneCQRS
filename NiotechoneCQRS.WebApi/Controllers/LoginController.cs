@@ -25,7 +25,7 @@ public class LoginController : ControllerBase
     }
 
     [HttpPost(ApiRoutes.Login)]
-    public async Task<IActionResult> Login(LoginRequestDTO login)
+    public async Task<IActionResult> Login([FromBody] LoginRequestDTO login)
     {
         var userResponse = await _sender.Send(new CheckUserValidatityCommand(login));
 
@@ -47,15 +47,12 @@ public class LoginController : ControllerBase
             TokenExpiry = expiry
         });
 
-        var response = new TokenResponse
+        return Ok(new
         {
             Token = token,
-            TokenType = "Bearer",
-            Message = AppResource.LoginSuccess,
-            Expires = expiry
-        };
-
-        return Ok(response);
+            Expires = expiry,
+            User = user
+        }); 
     }
 
 

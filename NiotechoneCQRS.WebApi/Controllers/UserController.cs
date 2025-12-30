@@ -7,7 +7,6 @@ using NiotechoneCQRS.Application.User.Commands.Delete;
 using NiotechoneCQRS.Application.User.Commands.Update;
 using NiotechoneCQRS.Application.User.Queries.GetAllUsers;
 using NiotechoneCQRS.Application.User.Queries.GetUserById;
-using System.Reflection.Metadata;
 
 namespace NiotechoneCQRS.WebApi.Controllers;
 
