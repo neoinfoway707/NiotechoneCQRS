@@ -10,4 +10,8 @@
     <ProjectReference Include="..\NiotechoneCQRS.Application\NiotechoneCQRS.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
 </Project>

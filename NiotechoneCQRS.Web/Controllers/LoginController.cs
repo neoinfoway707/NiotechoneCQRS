@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using NiotechoneCQRS.Application.DTOs.RequestDTOs;
 using NiotechoneCQRS.Application.DTOs.ResponseDTOs;
 using NiotechoneCQRS.Application.Enum;
 using NiotechoneCQRS.Domain.Entities;
+using System.Security.Claims;
 
 namespace NiotechoneCQRS.Web.Controllers;
 
@@ -39,17 +42,51 @@ public class LoginController : Controller
             return View("Index", login);
         }
 
-        HttpContext.Session.SetString("JwtToken", result!.Token!);
-        HttpContext.Session.SetInt32(
-            "UserRoleId",
-            (int)(result.User.UserRoleId));
+        HttpContext.Session.SetString("JwtToken", result.Token!);
+        HttpContext.Session.SetInt32("UserRoleId", (int)result.User.UserRoleId);
 
-        if (result.User.UserRoleId == (long?)Enums.UserType.SGEAdmin)
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.NameIdentifier, result.User.UserId.ToString()),
+            new Claim(ClaimTypes.Name, result.User.UserName),
+            new Claim(ClaimTypes.Role, result.User.UserRoleId.ToString())
+        };
+
+        var identity = new ClaimsIdentity(
+            claims,
+            CookieAuthenticationDefaults.AuthenticationScheme
+        );
+
+        var principal = new ClaimsPrincipal(identity);
+
+        await HttpContext.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme,
+            principal,
+            new AuthenticationProperties
+            {
+                IsPersistent = true,
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30)
+            }
+        );
+
+        if ((Enums.UserType)result.User.UserRoleId == Enums.UserType.SGEAdmin)
         {
             return RedirectToAction("Index", "Admin");
         }
 
         return RedirectToAction("Index", "Dashboard");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Logout()
+    {
+        await HttpContext.SignOutAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme
+        );
+
+        HttpContext.Session.Clear();
+
+        return RedirectToAction("Index", "Login");
     }
 
     private async Task LoadCompanies()

@@ -1,80 +1,177 @@
-﻿<link href="~/css/dashboard.css" rel="stylesheet" />
+﻿@{
+    ViewBag.PageTitle = "Dashboard";
+    ViewBag.ShowBackButton = true;
+    ViewBag.Breadcrumb = "<i class='fa fa-folder'></i> Home <span class='sep'>/</span> <strong>Dashboard</strong>";
+}
+
+<link href="~/css/dashboard.css" rel="stylesheet" />
+
+<!-- 🔹 THIS GOES INTO WHITE HEADER (_Layout) -->
+@section HeaderFilters {
+    <div class="pill-group">
+        <button class="pill-btn">
+            <i class="fa-regular fa-calendar"></i>
+            <span>Last Month</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </button>
+
+        <button class="pill-btn outline">
+            Reset
+        </button>
+    </div>
+}
+
 <div class="dashboard">
 
-    <!-- ===== Top Bar ===== -->
-    <div class="dashboard-header">
-        <h2>Dashboard</h2>
-
-        <div class="dashboard-actions">
-            <select>
-                <option>Last Month</option>
-                <option>This Month</option>
-                <option>This Week</option>
-            </select>
-
-            <button class="compare-btn">
-                <i class="fa fa-chart-line"></i> Compare to
-            </button>
-        </div>
-    </div>
-
-    <!-- ===== Cards Grid ===== -->
     <div class="dashboard-grid">
 
-        <!-- Card -->
-        <div class="card">
-            <div class="card-header">
-                Scheduled Compliance
-                <span>This Week</span>
+        <div class="card-wrapper">
+            <div class="card1">
+                <div class="card-header">
+                    <span>
+                        Work Order Distribution<br />
+                        By Work Status
+                    </span>
+                </div>
+
+                <div class="card-header1">
+                    <select>
+                        <option>Last Year</option>
+                        <option>This Year</option>
+                    </select>
+                </div>
             </div>
-            <div class="card-body">
-                Data Not Available.
+
+            <div class="card">
+                <div class="card-body empty">
+                    <i class="fa-solid fa-database"></i>
+                    <p>Data Not Available.</p>
+                </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">
-                Work Order Completed
-                <span>This Week</span>
+        <div class="card-wrapper">
+            <div class="card1">
+                <div class="card-header">
+                    <span>
+                        Work Order Distribution<br>
+                        By Work Status
+                    </span>
+                </div>
+
+                <div class="card-header1">
+                    <select>
+                        <option>Last Year</option>
+                        <option>This Year</option>
+                    </select>
+                </div>
             </div>
-            <div class="card-body">
-                Data Not Available.
+
+            <div class="card">
+                <div class="card-body empty">
+                    <i class="fa-solid fa-database"></i>
+                    <p>Data Not Available.</p>
+                </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">
-                % Planned vs Unplanned Man Hours
-                <span>This Week</span>
+        <div class="card-wrapper">
+            <div class="card1">
+                <div class="card-header">
+                    <span>
+                        Work Order Distribution<br />
+                        By Work Status
+                    </span>
+                </div>
+
+                <div class="card-header1">
+                    <select>
+                        <option>Last Year</option>
+                        <option>This Year</option>
+                    </select>
+                </div>
             </div>
-            <div class="card-body">
-                Data Not Available.
+
+            <div class="card">
+                <div class="card-body empty">
+                    <i class="fa-solid fa-database"></i>
+                    <p>Data Not Available.</p>
+                </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">
-                Work Order Distribution By Work Status
-                <span>This Week</span>
+        <div class="card-wrapper">
+            <div class="card1">
+                <div class="card-header">
+                    <span>
+                        Work Order Distribution<br />
+                        By Work Status
+                    </span>
+                </div>
+
+                <div class="card-header1">
+                    <select>
+                        <option>Last Year</option>
+                        <option>This Year</option>
+                    </select>
+                </div>
             </div>
-            <div class="card-body"></div>
+
+            <div class="card">
+                <div class="card-body empty">
+                    <i class="fa-solid fa-database"></i>
+                    <p>Data Not Available.</p>
+                </div>
+            </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">
-                Work Order Distribution By Work Status
-                <span>This Week</span>
+        <div class="card-wrapper">
+            <div class="card1">
+                <div class="card-header">
+                    <span>
+                        Work Order Distribution<br />
+                        By Work Status
+                    </span>
+                </div>
+
+                <div class="card-header1">
+                    <select>
+                        <option>Last Year</option>
+                        <option>This Year</option>
+                    </select>
+                </div>
             </div>
-            <div class="card-body"></div>
+
+            <div class="card">
+                <div class="card-body empty">
+                    <i class="fa-solid fa-database"></i>
+                    <p>Data Not Available.</p>
+                </div>
+            </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">
-                New Work Order
-                <span>This Week</span>
+        <div class="card-wrapper">
+            <div class="card1">
+                <div class="card-header">
+                    <span>
+                        Work Order Distribution<br />
+                        By Work Status
+                    </span>
+                </div>
+
+                <div class="card-header1">
+                    <select>
+                        <option>Last Year</option>
+                        <option>This Year</option>
+                    </select>
+                </div>
             </div>
-            <div class="card-body">
-                Data Not Available.
+
+            <div class="card">
+                <div class="card-body empty">
+                    <i class="fa-solid fa-database"></i>
+                    <p>Data Not Available.</p>
+                </div>
             </div>
         </div>
 
