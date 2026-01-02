@@ -1,4 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@using NiotechoneCQRS.Application
+@using NiotechoneCQRS.Application.Enum
+@using static NiotechoneCQRS.Application.Enum.Enums
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    var userRoleId = Context.Session.GetInt32("UserRoleId");
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -28,89 +38,110 @@
             </div>
 
             <ul class="menu">
-                <li class="active">
-                    <a asp-controller="Dashboard" asp-action="Index">
-                        <i class="fa fa-home"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
 
-                <li>
-                    <a asp-controller="WorkOrder" asp-action="Index">
-                        <i class="fa fa-briefcase"></i>
-                        <span>Work Order</span>
-                    </a>
-                </li>
+                @if (userRoleId == (int)UserRole.SuperAdmin)
+                {
+                    <li class="@IsActive("Company")">
+                        <a asp-controller="Company" asp-action="Index">
+                            <i class="fa fa-building"></i>
+                            <span>Companies</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a asp-controller="Sales" asp-action="Index">
-                        <i class="fa fa-chart-line"></i>
-                        <span>Sales</span>
-                    </a>
-                </li>
+                    <li class="@IsActive("User")">
+                        <a asp-controller="User" asp-action="Index">
+                            <i class="fa fa-users"></i>
+                            <span>Users</span>
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="@IsActive("Dashboard")">
+                        <a asp-controller="Dashboard" asp-action="Index">
+                            <i class="fa fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a asp-controller="PPM" asp-action="Index">
-                        <i class="fa fa-user"></i>
-                        <span>PPM</span>
-                    </a>
-                </li>
+                    <li class="@IsActive("WorkOrder")">
+                        <a asp-controller="WorkOrder" asp-action="Index">
+                            <i class="fa fa-briefcase"></i>
+                            <span>Work Order</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a asp-controller="Scheduling" asp-action="Index">
-                        <i class="fa fa-calendar"></i>
-                        <span>Scheduling</span>
-                    </a>
-                </li>
+                    <li class="@IsActive("Sales")">
+                        <a asp-controller="Sales" asp-action="Index">
+                            <i class="fa fa-chart-line"></i>
+                            <span>Sales</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a asp-controller="Assets" asp-action="Index">
-                        <i class="fa fa-box"></i>
-                        <span>Assets</span>
-                    </a>
-                </li>
+                    <li class="@IsActive("PPM")">
+                        <a asp-controller="PPM" asp-action="Index">
+                            <i class="fa fa-user"></i>
+                            <span>PPM</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a asp-controller="Personnel" asp-action="Index">
-                        <i class="fa fa-users"></i>
-                        <span>Personnel</span>
-                    </a>
-                </li>
+                    <li class="@IsActive("Scheduling")">
+                        <a asp-controller="Scheduling" asp-action="Index">
+                            <i class="fa fa-calendar"></i>
+                            <span>Scheduling</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a asp-controller="Activity" asp-action="Index">
-                        <i class="fa fa-layer-group"></i>
-                        <span>Activity Overview</span>
-                    </a>
-                </li>
+                    <li class="@IsActive("Assets")">
+                        <a asp-controller="Assets" asp-action="Index">
+                            <i class="fa fa-box"></i>
+                            <span>Assets</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a asp-controller="Clients" asp-action="Index">
-                        <i class="fa fa-building"></i>
-                        <span>Clients</span>
-                    </a>
-                </li>
+                    <li class="@IsActive("Personnel")">
+                        <a asp-controller="Personnel" asp-action="Index">
+                            <i class="fa fa-users"></i>
+                            <span>Personnel</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a asp-controller="JobOrders" asp-action="Index">
-                        <i class="fa fa-file"></i>
-                        <span>Job Orders</span>
-                    </a>
-                </li>
+                    <li class="@IsActive("Activity")">
+                        <a asp-controller="Activity" asp-action="Index">
+                            <i class="fa fa-layer-group"></i>
+                            <span>Activity Overview</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a asp-controller="Inventory" asp-action="Index">
-                        <i class="fa fa-warehouse"></i>
-                        <span>Inventory</span>
-                    </a>
-                </li>
+                    <li class="@IsActive("Clients")">
+                        <a asp-controller="Clients" asp-action="Index">
+                            <i class="fa fa-building"></i>
+                            <span>Clients</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a asp-controller="KPI" asp-action="Index">
-                        <i class="fa fa-chart-pie"></i>
-                        <span>KPI</span>
-                    </a>
-                </li>
+                    <li class="@IsActive("JobOrders")">
+                        <a asp-controller="JobOrders" asp-action="Index">
+                            <i class="fa fa-file"></i>
+                            <span>Job Orders</span>
+                        </a>
+                    </li>
+
+                    <li class="@IsActive("Inventory")">
+                        <a asp-controller="Inventory" asp-action="Index">
+                            <i class="fa fa-warehouse"></i>
+                            <span>Inventory</span>
+                        </a>
+                    </li>
+
+                    <li class="@IsActive("KPI")">
+                        <a asp-controller="KPI" asp-action="Index">
+                            <i class="fa fa-chart-pie"></i>
+                            <span>KPI</span>
+                        </a>
+                    </li>
+                }
+
             </ul>
         </aside>
 
@@ -194,3 +225,18 @@
 
 </body>
 </html>
+
+@functions {
+    string IsActive(string controller, string action = "")
+    {
+        var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+        var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+
+        if (!string.IsNullOrEmpty(action))
+        {
+            return controller == currentController && action == currentAction ? "active" : "";
+        }
+
+        return controller == currentController ? "active" : "";
+    }
+}

@@ -1,20 +1,3 @@
-﻿@using NiotechoneCQRS.Application
-@using NiotechoneCQRS.Application.Enum
-@using static NiotechoneCQRS.Application.Enum.Enums
-
-@{
-    var userRoleId = Context.Session.GetInt32("UserRoleId");
-
-    if (userRoleId == null)
-    {
-        Layout = "_LoginLayout";
-    }
-    else if (userRoleId == (int)UserType.SGEAdmin)
-    {
-        Layout = "_AdminLayout";
-    }
-    else
-    {
-        Layout = "_Layout";
-    }
+﻿@{
+    Layout = "_Layout";
 }

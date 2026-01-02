@@ -12,4 +12,16 @@ public class Enums
         Client = 6,
         Supervisor = 7
     }
+
+    public enum ArtifactType
+    {
+        CompanyHeader = 1,
+        CompanyFooter = 2,
+        FavImage = 3
+    }
+
+    public enum UserRole
+    {
+        SuperAdmin = 1
+    }
 }

@@ -69,9 +69,9 @@ public class LoginController : Controller
             }
         );
 
-        if ((Enums.UserType)result.User.UserRoleId == Enums.UserType.SGEAdmin)
+        if ((Enums.UserRole)result.User.UserRoleId == Enums.UserRole.SuperAdmin)
         {
-            return RedirectToAction("Index", "Admin");
+            return RedirectToAction("Index", "Company");
         }
 
         return RedirectToAction("Index", "Dashboard");
