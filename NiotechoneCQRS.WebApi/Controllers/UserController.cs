@@ -60,6 +60,8 @@ public class UserController : ControllerBase
     [HttpPost(ApiRoutes.Create)]
     public async Task<IActionResult> Create([FromBody] CreateUserCommand command)
     {
+        command.CountryId = command.CountryId == 0 ? 1 : 1;
+        command.UserRoleId = command.UserRoleId== 0 ? 1 : 1;
         var user = await _sender.Send(command);
 
         if (user == null || !user.Data)
@@ -74,6 +76,8 @@ public class UserController : ControllerBase
     public async Task<IActionResult> Update(int id, [FromBody] UpdateUserCommand command)
     {
         command.Id = id;
+        command.CountryId = command.CountryId == 0 ? 1 : 1;
+        command.UserRoleId = command.UserRoleId == 0 ? 1 : 1;
         var user = await _sender.Send(command);
 
         if (user == null || !user.Data)

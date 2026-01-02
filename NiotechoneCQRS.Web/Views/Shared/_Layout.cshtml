@@ -5,110 +5,48 @@
     <title>@ViewData["Title"]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" />
+
+    <!-- Custom CSS -->
     <link href="~/css/sidebar.css" rel="stylesheet" />
+    @* <link href="~/css/user.css" rel="stylesheet" /> *@
 </head>
 <body>
 
     <div class="app-layout">
-
+        <!-- ================= LEFT SIDEBAR ================= -->
         <aside class="sidebar" id="sidebar">
-
             <div class="sidebar-header">
                 <div class="logo"></div>
-
                 <div class="sidebar-toggle" onclick="toggleSidebar()">
                     <i class="fa fa-bars"></i>
                 </div>
             </div>
-
             <ul class="menu">
-                <li class="active">
-                    <a asp-controller="Dashboard" asp-action="Index">
-                        <i class="fa fa-home"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a asp-controller="WorkOrder" asp-action="Index">
-                        <i class="fa fa-briefcase"></i>
-                        <span>Work Order</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a asp-controller="Sales" asp-action="Index">
-                        <i class="fa fa-chart-line"></i>
-                        <span>Sales</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a asp-controller="PPM" asp-action="Index">
-                        <i class="fa fa-user"></i>
-                        <span>PPM</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a asp-controller="Scheduling" asp-action="Index">
-                        <i class="fa fa-calendar"></i>
-                        <span>Scheduling</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a asp-controller="Assets" asp-action="Index">
-                        <i class="fa fa-box"></i>
-                        <span>Assets</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a asp-controller="Personnel" asp-action="Index">
-                        <i class="fa fa-users"></i>
-                        <span>Personnel</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a asp-controller="Activity" asp-action="Index">
-                        <i class="fa fa-layer-group"></i>
-                        <span>Activity Overview</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a asp-controller="Clients" asp-action="Index">
-                        <i class="fa fa-building"></i>
-                        <span>Clients</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a asp-controller="JobOrders" asp-action="Index">
-                        <i class="fa fa-file"></i>
-                        <span>Job Orders</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a asp-controller="Inventory" asp-action="Index">
-                        <i class="fa fa-warehouse"></i>
-                        <span>Inventory</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a asp-controller="KPI" asp-action="Index">
-                        <i class="fa fa-chart-pie"></i>
-                        <span>KPI</span>
-                    </a>
-                </li>
+                <li class="active"><a asp-controller="Dashboard" asp-action="Index"><i class="fa fa-home"></i> Dashboard</a></li>
+                @* <li><a asp-controller="User" asp-action="Index"><i class="fa fa-users"></i> Users</a></li> *@
+                <li><a asp-controller="WorkOrder" asp-action="Index"><i class="fa fa-briefcase"></i> Work Order</a></li>
+                <li><a asp-controller="Sales" asp-action="Index"><i class="fa fa-chart-line"></i> Sales</a></li>
+                <li><a asp-controller="PPM" asp-action="Index"><i class="fa fa-user"></i> PPM</a></li>
+                <li><a asp-controller="Scheduling" asp-action="Index"><i class="fa fa-calendar"></i> Scheduling</a></li>
+                <li><a asp-controller="Assets" asp-action="Index"><i class="fa fa-box"></i> Assets</a></li>
+                <li><a asp-controller="Personnel" asp-action="Index"><i class="fa fa-users"></i> Personnel</a></li>
+                <li><a asp-controller="Activity" asp-action="Index"><i class="fa fa-layer-group"></i> Activity Overview</a></li>
+                <li><a asp-controller="Clients" asp-action="Index"><i class="fa fa-building"></i> Clients</a></li>
+                <li><a asp-controller="JobOrders" asp-action="Index"><i class="fa fa-file"></i> Job Orders</a></li>
+                <li><a asp-controller="Inventory" asp-action="Index"><i class="fa fa-warehouse"></i> Inventory</a></li>
+                <li><a asp-controller="KPI" asp-action="Index"><i class="fa fa-chart-pie"></i> KPI</a></li>
             </ul>
         </aside>
 
@@ -116,19 +54,30 @@
         <main class="content">
             @RenderBody()
         </main>
-
     </div>
 
+    <!-- ================= SCRIPTS ================= -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+
+
+    <!-- Custom Scripts -->
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.querySelector(".sidebar");
+            if (!sidebar) return;
+            sidebar.classList.toggle("collapsed");
+        }
+
+        
+    </script>
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
-
-<script>
-    function toggleSidebar() {
-        const sidebar = document.querySelector(".sidebar");
-
-        if (!sidebar) return; // safety check
-
-        sidebar.classList.toggle("collapsed");
-    }
-</script>
-
