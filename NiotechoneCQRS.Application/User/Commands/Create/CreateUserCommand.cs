@@ -21,6 +21,7 @@ public class CreateUserCommand : IRequest<ResponseDTO<bool>>
     public string Password { get; set; } = string.Empty;
     [DefaultValue(1)]
     public int StatusId { get; set; } = 1;
+    public int UserTypeId { get; set; } = 1;
 }
 
 public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, ResponseDTO<bool>>

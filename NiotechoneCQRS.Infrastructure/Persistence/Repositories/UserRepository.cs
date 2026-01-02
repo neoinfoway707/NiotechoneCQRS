@@ -20,7 +20,7 @@ public class UserRepository : IUserRepository
 
         const string sql = @"
                 SELECT *
-                FROM [User]";
+                FROM [User] order by 1 desc";
 
         var users = await connection.QueryAsync<User>(sql);
 
@@ -30,8 +30,9 @@ public class UserRepository : IUserRepository
     public async Task<User?> GetUserByIdAsync(string id, CancellationToken cancellationToken = default)
     {
         const string sql = @"
-                SELECT *
-                FROM [User]
+                SELECT u.*,c.CompanyName
+                FROM [User] u
+                LEFT JOIN dbo.Company c ON u.CompanyId = c.CompanyId
                 WHERE UserId = @UserId;
             ";
 
@@ -60,8 +61,8 @@ public class UserRepository : IUserRepository
     public async Task<bool> CreateUserAsync(User user, CancellationToken cancellationToken = default)
     {
         const string sql = @"
-                INSERT INTO [User] (FullName, UserRoleId, Address, CountryId, Email, Phone, Description, UserName, PasswordDecrypt,StatusId,CompanyId)
-                VALUES (@FullName, @UserRoleId, @Address, @CountryId, @Email, @Phone, @Description, @UserName, @PasswordDecrypt,@StatusId,@CompanyId);
+                INSERT INTO [User] (FullName, UserRoleId, Address, CountryId, Email, Phone, Description, UserName, PasswordDecrypt,StatusId,CompanyId,UserTypeId)
+                VALUES (@FullName, @UserRoleId, @Address, @CountryId, @Email, @Phone, @Description, @UserName, @PasswordDecrypt,@StatusId,@CompanyId,@UserTypeId);
             ";
         using var connection = _connectionFactory.CreateConnection();
         var rowsAffected = await connection.ExecuteAsync(
@@ -78,14 +79,17 @@ public class UserRepository : IUserRepository
                 UserName = user.UserName,
                 PasswordDecrypt = user.Password,
                 StatusId = user.StatusId,
-                CompanyId = user.CompanyId
+                CompanyId = user.CompanyId,
+                UserTypeId = user.UserTypeId
             }
         );
         return rowsAffected > 0;
     }
     public async Task<bool> UpdateUserAsync(User user, CancellationToken cancellationToken)
     {
-        var sql = @"
+        try
+        {
+            var sql = @"
         UPDATE [dbo].[User]
         SET
             FullName = @FullName,
@@ -97,41 +101,50 @@ public class UserRepository : IUserRepository
             Phone = @Phone,
             Description = @Description,
             UserName = @UserName,
-            StatusId = @StatusId
+            StatusId = @StatusId,
+            UserTypeId = @UserTypeId
             /**PASSWORD**/
         WHERE UserId = @UserId;";
 
-        var parameters = new DynamicParameters(user); // Maps properties automatically if names match
+            var parameters = new DynamicParameters(user); // Maps properties automatically if names match
 
-        if (!string.IsNullOrWhiteSpace(user.PasswordDecrypt))
-        {
-            sql = sql.Replace("/**PASSWORD**/", ", PasswordDecrypt = @Password");
-            parameters.Add("Password", user.PasswordDecrypt);
-        }
-        else
-        {
-            sql = sql.Replace("/**PASSWORD**/", "");
-        }
+            if (!string.IsNullOrWhiteSpace(user.PasswordDecrypt))
+            {
+                sql = sql.Replace("/**PASSWORD**/", ", PasswordDecrypt = @Password");
+                parameters.Add("Password", user.PasswordDecrypt);
+            }
+            else
+            {
+                sql = sql.Replace("/**PASSWORD**/", "");
+            }
 
-        using var connection = _connectionFactory.CreateConnection();
-        var rowsAffected = await connection.ExecuteAsync(
-            new CommandDefinition(
-                sql,
-                parameters,
-                cancellationToken: cancellationToken
-            )
-        );
-        return rowsAffected > 0;
+            using var connection = _connectionFactory.CreateConnection();
+            var rowsAffected = await connection.ExecuteAsync(
+                new CommandDefinition(
+                    sql,
+                    parameters,
+                    cancellationToken: cancellationToken
+                )
+            );
+            return rowsAffected > 0;
+        }
+        catch (Exception ex)
+        {
+
+            throw;
+        }
+        
     }
     public async Task<User?> IsUserValid(string email, string password, int? companyId)
     {
         const string sql = @"
-        SELECT TOP 1 *
-        FROM dbo.[User]
-        WHERE Email = @Email
-          AND PasswordDecrypt = @PasswordDecrypt
-          AND (@CompanyId IS NULL OR CompanyId = @CompanyId);
-    ";
+    SELECT TOP 1 u.*, c.CompanyName
+    FROM dbo.[User] u
+    LEFT JOIN dbo.Company c ON u.CompanyId = c.CompanyId
+    WHERE u.Email = @Email
+      AND u.PasswordDecrypt = @PasswordDecrypt
+      AND (@CompanyId IS NULL OR u.CompanyId = @CompanyId);
+";
 
         using var connection = _connectionFactory.CreateConnection();
 
