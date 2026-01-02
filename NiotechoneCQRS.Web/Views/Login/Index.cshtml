@@ -12,6 +12,9 @@
     <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="~/css/login.css" rel="stylesheet" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
 </head>
 <body>
 
@@ -23,59 +26,76 @@
         <div class="login-card">
 
             <div class="avatar">
-                <span>+</span>
+                <span class="avatar-icon">👤</span>
             </div>
 
-            <!-- FORM START -->
             <form asp-controller="Login" asp-action="Login" method="post">
 
-                <select class="input" name="CompanyId">
-                    <option value="">Select Company</option>
-
-                    @foreach (var company in (List<Company>)ViewBag.Companies)
-                    {
-                        <option value="@company.CompanyId">
-                            @company.CompanyName
-                        </option>
-                    }
-                </select>
-
-
-                <input class="input"
-                       asp-for="Email"
-                       type="email"
-                       placeholder="Ex: Johndoe@financial.com"/>
-
-                <div class="password-field">
-                    <input class="input"
-                           asp-for="Password"
-                           type="password"
-                           id="password"
-                           placeholder="Enter your password" />
-                    <span class="eye" onclick="togglePassword()">👁</span>
+                <!-- Company -->
+                <div class="field">
+                    <select class="input" name="CompanyId">
+                        <option value="">Select Company</option>
+                        @foreach (var company in (List<Company>)ViewBag.Companies)
+                        {
+                            <option value="@company.CompanyId">@company.CompanyName</option>
+                        }
+                    </select>
                 </div>
 
-                <div class="options">
-                    <label>
-                        <input type="checkbox" /> Stay Signed In
+                <!-- Email -->
+                <div class="field">
+                    <label class="field-label">Email</label>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-envelope input-icon"></i>
+                        <input class="input with-icon"
+                               asp-for="Email"
+                               type="email"
+                               placeholder="Ex: Johndoe@financial.com" />
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="field">
+                    <label class="field-label">Password</label>
+                    <div class="input-wrapper password-field">
+                        <i class="fa-regular fa-lock input-icon"></i>
+                        <input class="input with-icon password-input"
+                               asp-for="Password"
+                               type="password"
+                               id="password"
+                               placeholder="Enter your password" />
+                        <i class="fa-regular fa-eye eye" onclick="togglePassword()"></i>
+                    </div>
+                </div>
+
+
+                <!-- Options -->
+                <div class="options-row">
+                    <label class="remember">
+                        <input type="checkbox" />
+                        Stay Signed In
                     </label>
-                    <a href="#">Forgot Password?</a>
+
+                    <a href="#" class="forgot-pill">Forgot Password?</a>
                 </div>
 
-                <p class="terms">
-                    By clicking Login, you agree to the terms and conditions.
-                </p>
+                <div class="terms-row">
+                    <label class="terms-check">
+                        <input type="checkbox" />
+                        <span>
+                            By clicking Register, By clicking RegisterBy clicking
+                            RegisterBy clicking RegisterBy clicking Register
+                        </span>
+                    </label>
+                </div>
 
                 <button class="login-btn" type="submit">Login</button>
-
             </form>
-            <!-- FORM END -->
-
         </div>
     </main>
 
-    <footer>
-        ©2025 STARCMMS. All Rights Reserved.
+    <footer class="footer">
+        ©2026 Niotechone. All Rights Reserved.
     </footer>
 
     <script>
@@ -85,12 +105,12 @@
         }
     </script>
 
+    @if (ViewData.ModelState.ErrorCount > 0)
+    {
+        <script>
+            alert("Invalid login credentials");
+        </script>
+    }
+
 </body>
 </html>
-
-@if (ViewData.ModelState.ErrorCount > 0)
-{
-    <script>
-        alert("Invalid login credentials");
-    </script>
-}
