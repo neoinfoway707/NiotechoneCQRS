@@ -22,6 +22,7 @@ public class UpdateUserCommand : IRequest<ResponseDTO<bool>>
     public string UserName { get; set; } = string.Empty;
     //public string? Password { get; set; }
     public int StatusId { get; set; }
+    public int UserTypeId { get; set; }
 }
 public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ResponseDTO<bool>>
 {

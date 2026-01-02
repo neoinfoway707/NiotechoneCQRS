@@ -1,0 +1,96 @@
+﻿@* @using Kendo.Mvc.UI *@
+@using NiotechoneCQRS.Web.Models
+@model UserViewModel
+
+@{
+    ViewData["Title"] = "Create User";
+}
+<link href="~/css/user.css" rel="stylesheet" />
+
+<div class="tab-container">
+    <div class="tabs">
+        <div class="tab active">Add User</div>
+    </div>
+</div>
+
+<form method="post">
+    <div class="form-container">
+        <div class="form-group">
+            <label>Companies</label>
+            <input type="text" class="form-control" readonly value="@ViewBag.TenantName" />
+            <input type="hidden" asp-for="CompanyId" value="@ViewBag.CompanyId" />
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4">Email Address <span style="color:red">*</span></label>
+            <input class="col-sm-8" type="email" asp-for="Email" />
+            <span class="text-danger" asp-validation-for="Email"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Name <span style="color:red">*</span></label>
+            <input type="text" asp-for="FullName" />
+            <span class="text-danger" asp-validation-for="FullName"></span>
+        </div>
+
+        <div class="form-group">
+            <label>User Name <span style="color:red">*</span></label>
+            <input type="text" asp-for="UserName" readonly value="@ViewBag.UserName" />
+            <span class="text-danger" asp-validation-for="UserName"></span>
+        </div>
+
+        <div class="form-group form-group-full">
+            <label>Address <span style="color:red">*</span></label>
+            <textarea asp-for="Address"></textarea>
+            <span class="text-danger" asp-validation-for="Address"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Phone No. <span style="color:red">*</span></label>
+            <div style="display:flex; gap:5px;">
+                <input type="text" style="width:80px;" readonly value="+971"/>
+                <input type="text" style="flex:1;" asp-for="Phone" />
+            </div>
+            <span class="text-danger" asp-validation-for="Phone"></span>
+        </div>
+
+      @*   <div class="form-group">
+            <label>Status</label>
+            <select asp-for="StatusId">
+                <option value="1">Active</option>
+                <option value="0" selected>InActive</option>
+            </select>
+        </div> *@
+
+
+        <div class="form-group">
+            <label>Status</label>
+            <div class="form-check">
+                @Html.RadioButtonFor(model => model.StatusId, 1, new { @class = "form-check-input", id = "StatusActive" })
+                <label class="form-check-label" for="StatusActive">Active</label>
+            </div>
+            <div class="form-check">
+                @Html.RadioButtonFor(model => model.StatusId, 0, new { @class = "form-check-input", id = "StatusInactive" })
+                <label class="form-check-label" for="StatusInactive">Inactive</label>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label>User Type</label>
+            <select asp-for="UserTypeId">
+                <option value="3" selected>Requestor</option>
+                <option value="4">Admin</option>
+                <option value="6">Client</option>
+                <option value="7">Supervisor</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="btn-group">
+        @* <button type="button" class="btn btn-primary">Get LDAP Users</button> *@
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a type="button" asp-action="Index" asp-controller="User" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+

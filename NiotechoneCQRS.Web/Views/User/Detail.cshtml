@@ -1,0 +1,70 @@
+﻿@using NiotechoneCQRS.Application.DTOs.ResponseDTOs
+@using NiotechoneCQRS.Web.Models
+@model UserDetailDTO
+
+@{
+    ViewData["Title"] = "Create User";
+}
+<link href="~/css/user.css" rel="stylesheet" />
+
+<div class="tab-container">
+    <div class="tabs">
+    </div>
+</div>
+
+<form method="post">
+    <div class="form-container">
+        <div class="form-group">
+            <label>Companies</label>
+            <input type="text" class="form-control" disabled value="@Model.data.companyName" />
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4">Email Address <span style="color:red">*</span></label>
+            <input class="col-sm-8" type="email" disabled value="@Model.data.email" />
+        </div>
+
+        <div class="form-group">
+            <label>Name <span style="color:red">*</span></label>
+            <input type="text" disabled value="@Model.data.fullName" />
+        </div>
+
+        <div class="form-group">
+            <label>User Name <span style="color:red">*</span></label>
+            <input type="text" disabled value="@Model.data.userName" />
+        </div>
+
+        <div class="form-group form-group-full">
+            <label>Address <span style="color:red">*</span></label>
+            <textarea disabled>@Model.data.address</textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Phone No. <span style="color:red">*</span></label>
+            <div style="display:flex; gap:5px;">
+                <input type="text" style="width:80px;" disabled value="+971" />
+                <input type="text" style="flex:1;" disabled value="@Model.data.phone" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Status</label>
+            <input type="text" disabled value="@(Model.data.statusId == 1 ? "Active" : "Inactive")" />
+        </div>
+
+        <div class="form-group">
+            <label>User Type</label>
+            <input type="text" disabled value="@Model.data.userTypeId" />
+        </div>
+    </div>
+
+    <div class="btn-group">
+        <button type="button"
+                class="btn btn-secondary"
+                onclick="location.href='@Url.Action("Index", "User")'">
+            Cancel
+        </button>
+
+    </div>
+</form>
+

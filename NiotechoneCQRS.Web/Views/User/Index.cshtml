@@ -1,165 +1,478 @@
-﻿@using Kendo.Mvc.UI
-@using NiotechoneCQRS.Application.DTOs.ResponseDTOs
+﻿@using NiotechoneCQRS.Application.DTOs.ResponseDTOs
+@model UserListModelDTO
 
-@model IEnumerable<UserModel>
+@{
+    ViewData["Title"] = "Users";
+}
+<link href="~/css/user.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Inter:wght@400;500;600&family=Wix+Madefor+Display:wght@400&display=swap" rel="stylesheet">
 
-<div id="parentHorizontalTab">
-    <div class="clearfix"></div>
-    <div class="tab-content col mt-3">
-        <div>
-            <div class="clearfix"></div>
-            <div class="row">
-                <div class="col-lg-5 col-md-12 pull-left">
-                    <div class="form-group row">
-                        @if (ViewBag.IsTenant == false)
-                        {
-                            <div class="col-sm-8">
-                                @Html.DropDownList("TenantList", (IEnumerable<SelectListItem>)ViewBag.TenantList, new { @class = "form-control", @id = "tenantDdl" })
-                                @Html.Hidden("companyId")
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" readonly="true" value="@ViewBag.TenantName" />
-                                @Html.Hidden("companyId")
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="tab-pane fade show active" id="userlist" role="tabpanel" aria-labelledby="userlist-tab">
-                @* <div>
-                    @(Html.Kendo().Grid(Model)
-                                        .Name("UserListGrid")
-                                        .Columns(columns =>
+
+<!-- Tabs Navigation with exact master design -->
+<div class="tabs">
+    <a class="tab active" data-tab="quotation" href="/User/Index">Quotation</a>
+    <div class="tab" data-tab="work-request">Work Request</div>
+    <div class="tab" data-tab="pre-inspection">Pre-Inspection</div>
+    <div class="tab" data-tab="work-order">Work Order</div>
+    <div class="tab" data-tab="invoicing">Invoicing</div>
+</div>
+
+<!-- Quotation Tab Content -->
+<div id="quotation-content" class="tab-content-container">
+    <div class="table-container">
+        <!-- Table Header with Add Button -->
+        <div class="table-header">
+            <button class="customize-button">
+                <svg viewBox="0 0 20 20">
+                    <path d="M7.33333 7.33333V3.33333H8.66667V7.33333H12.6667V8.66667H8.66667V12.6667H7.33333V8.66667H3.33333V7.33333H7.33333Z" fill="white" />
+                </svg>
+                Customize Columns
+            </button>
+        </div>
+
+        <!-- Data Table -->
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>
+                        <span>Full Name</span>
+                        <svg class="filter-icon" viewBox="0 0 16 16">
+                            <path d="M6.66667 12H9.33333V10.6667H6.66667V12ZM2 4V5.33333H14V4H2ZM4 8.66667H12V7.33333H4V8.66667Z" fill="#64748B" />
+                        </svg>
+                    </th>
+                    <th>
+                        <span>User Name</span>
+                        <svg class="filter-icon" viewBox="0 0 16 16">
+                            <path d="M6.66667 12H9.33333V10.6667H6.66667V12ZM2 4V5.33333H14V4H2ZM4 8.66667H12V7.33333H4V8.66667Z" fill="#64748B" />
+                        </svg>
+                    </th>
+                    <th>
+                        <span>Email</span>
+                        <svg class="filter-icon" viewBox="0 0 16 16">
+                            <path d="M6.66667 12H9.33333V10.6667H6.66667V12ZM2 4V5.33333H14V4H2ZM4 8.66667H12V7.33333H4V8.66667Z" fill="#64748B" />
+                        </svg>
+                    </th>
+                    <th>
+                        <span>Status</span>
+                        <svg class="filter-icon" viewBox="0 0 16 16">
+                            <path d="M6.66667 12H9.33333V10.6667H6.66667V12ZM2 4V5.33333H14V4H2ZM4 8.66667H12V7.33333H4V8.66667Z" fill="#64748B" />
+                        </svg>
+                    </th>
+                    <th>
+                        <span>User Role</span>
+                        <svg class="filter-icon" viewBox="0 0 16 16">
+                            <path d="M6.66667 12H9.33333V10.6667H6.66667V12ZM2 4V5.33333H14V4H2ZM4 8.66667H12V7.33333H4V8.66667Z" fill="#64748B" />
+                        </svg>
+                    </th>
+                    <th>
+                        <span>Address</span>
+                        <svg class="filter-icon" viewBox="0 0 16 16">
+                            <path d="M6.66667 12H9.33333V10.6667H6.66667V12ZM2 4V5.33333H14V4H2ZM4 8.66667H12V7.33333H4V8.66667Z" fill="#64748B" />
+                        </svg>
+                    </th>
+                    <th>
+                        <span>Phone</span>
+                        <svg class="filter-icon" viewBox="0 0 16 16">
+                            <path d="M6.66667 12H9.33333V10.6667H6.66667V12ZM2 4V5.33333H14V4H2ZM4 8.66667H12V7.33333H4V8.66667Z" fill="#64748B" />
+                        </svg>
+                    </th>
+                    <th>
+                        <span>Last Login</span>
+                        <svg class="filter-icon" viewBox="0 0 16 16">
+                            <path d="M6.66667 12H9.33333V10.6667H6.66667V12ZM2 4V5.33333H14V4H2ZM4 8.66667H12V7.33333H4V8.66667Z" fill="#64748B" />
+                        </svg>
+                    </th>
+                    <th>
+                        <span>Actions</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                @{
+                    int totalCount = Model.data != null ? Model.data.Count() : 0;
+                }
+
+                @if (Model.data != null && Model.data.Any())
+                {
+                    @foreach (var emp in Model.data)
+                    {
+                        <tr class="data-row">
+                            <td>
+                                <a href="/User/Detail/@emp.userId" class="user-link">@emp.fullName</a>
+                            </td>
+                            <td>@emp.userName</td>
+                            <td>@emp.email</td>
+                            <td>
+                                @{
+                                    string statusClass = "pending";
+                                    string statusText = "Pending";
+
+                                    if (emp.statusId == 1)
+                                    {
+                                        statusClass = "active";
+                                        statusText = "Active";
+                                    }
+                                    else if (emp.statusId == 0)
+                                    {
+                                        statusClass = "inactive";
+                                        statusText = "Inactive";
+                                    }
+                                }
+                                <span class="status @statusClass">
+                                    @statusText
+                                </span>
+                            </td>
+                            <td>@emp.userRoleId</td>
+                            <td>@emp.address</td>
+                            <td>@emp.phone</td>
+                            <td>
+                                @{
+                                    string lastLogin = "Never";
+                                    if (emp.lastLoginDate != null)
+                                    {
+                                        try
                                         {
-                                            columns.Bound(p => p.UserId).Visible(false);
-                                            columns.Bound(p => p.PersonalTypeId).Visible(false);
-                                            columns.Bound(p => p.FullName).Title(WorkOrderResource.FullName).Width("40%").ClientTemplate("#if((('" + (bool)ViewBag.IsCompanySwitchingEnabled + "'=='True') && (PersonalTypeId == null || PersonalTypeId == " + (int)Enums.PersonnelType.InHouse + ")) || (UserRoleName != 'crew' && UserRoleName != 'crew-admin')){#" + "<a class='inline-link' href='" + Url.Action("UserDetail", "SGEAdmin") + "?userIdp=#= UserIdEncrypt#&allowEdit=false&statusFlag" + Uri.EscapeDataString(SGE.Aladdin.Common.Encryption.CryptorHelper.Encrypt(Convert.ToString(true), true)) + "'" + ">#= FullName# </a>" + "#}else {#<a>#= FullName# </a>#} #");
-                                            columns.Bound(p => p.UserName).Title(AdminResources.Username).Width("40%");
-                                            columns.Bound(p => p.Email).Title(AdminResources.Emailaddress).Width("40%");
-                                            columns.Bound(p => p.StatusName).Title(AdminResources.Status).Width("20%");
-                                            columns.Bound(p => p.UserRoleName).Title(AdminResources.Userrole).Width("40%");
-                                            columns.Bound(p => p.Address).Title(AdminResources.Address).Width("30%");
-                                            columns.Bound(p => p.Phone).Title(AdminResources.Phone).Width("30%");
-                                            columns.Bound(p => p.LastLoginDate).Title(AdminResources.LastLoginDate).Width("40%");
-                                            columns.Template(@<text></text>).ClientTemplate("<a href='" + Url.Action("UserDetail", "SGEAdmin") + "?userIdp=#= UserIdEncrypt#&allowEdit=true&statusFlag"
-                                            + Uri.EscapeDataString(SGE.Aladdin.Common.Encryption.CryptorHelper.Encrypt(Convert.ToString(true), true)) + "'"
-                                            + "class='edit-ico'" + "title='" + string.Format(CommonResources.EditTooltip, TenantResource.Tenant) + "'>" + "</a>"
-                                            ).Title(CommonResources.Edit).Width("10%");
+                                            lastLogin = ((DateTime)emp.lastLoginDate).ToString("MMM dd, yyyy");
+                                        }
+                                        catch
+                                        {
+                                            lastLogin = emp.lastLoginDate.ToString();
+                                        }
+                                    }
+                                }
+                                @lastLogin
+                            </td>
+                            <td>
+                                <div style="display: flex; gap: 4px;">
+                                    <a href="/User/Edit/@emp.userId" class="action-btn btn-edit" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <form method="post" action="/User/Delete/@emp.userId" onsubmit="return confirm('Are you sure you want to delete this user?');" style="display:inline;">
+                                        <button type="submit" class="action-btn btn-delete" title="Delete">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="9" style="text-align: center; padding: 40px; color: #64748B;">
+                            No users found
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-                                            if (ViewBag.IsTenant == false)
-                                            {
-                                                columns.Template(@<text></text>).ClientTemplate("#if(UserRoleName != 'crew' && UserRoleName != 'crew-admin'){#" + "<a href='javascript:void(0);' onclick='DeleteUser(#:UserId#);' class='delete-ico' title='" + string.Format(CommonResources.DeleteTooltip, AdminResources.Tenant) + "'>" + "</a>" + "#}else {# #} #").Title(CommonResources.Delete).Width("10%");
-                                            }
-                                        })
-                                        .Events(events => events.DataBinding("onDataBinding"))
-                                        .DataSource(dataSource => dataSource
-                                        .Ajax()
-                                        .Model(model => model.Id(p => p.UserId))
-                                        .Read(read => read.Action("GetUserList", "SGEAdmin").Data("additionalInfo"))
-                                        .PageSize(int.Parse(ConfigurationManager.AppSettings[Constant.DEFAULTGRIDPAGESIZE]))
-                                        )
-                                        .Pageable(p => p.PageSizes(new[] { 5, 10, 20, 50, 100 }))
-                                        .Reorderable(x => x.Columns(true))
-                                        .Resizable(x => x.Columns(true))
-                                        .Scrollable()
-                                        .Sortable(x => x.Enabled(true))
-                                        )
-                </div> *@
+        <!-- Table Footer with Pagination -->
+        <div class="table-footer">
+            <div class="footer-left">
+            <div class="pagination-info">
+                <span>Showing <span id="startRow">1</span> - <span id="endRow">10</span> of <span id="totalRows">@totalCount</span></span>
+                <select class="page-size-select" id="pageSizeSelect">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>            
+
+            <div class="pagination-controls">
+                <button class="pagination-btn" id="firstPage" onclick="goToFirstPage()">
+                    <svg viewBox="0 0 16 16">
+                        <path d="M6.72387 8L3.52861 11.1953L4.47141 12.1381L8.60947 8L4.47141 3.86194L3.52861 4.80475L6.72387 8ZM11.3333 4.00001V12H10V4.00001H11.3333Z" fill="currentColor" transform="rotate(180 8 8)" />
+                    </svg>
+                </button>
+                <button class="pagination-btn" id="prevPage" onclick="goToPrevPage()">
+                    <svg viewBox="0 0 16 16">
+                        <path d="M8.7813 8.00047L5.48145 4.70062L6.42426 3.75781L10.6669 8.00047L6.42426 12.2431L5.48145 11.3003L8.7813 8.00047Z" fill="currentColor" transform="rotate(180 8 8)" />
+                    </svg>
+                </button>
+                <span class="page-number-text" style="padding: 8px 12px; color: #64748B; display: none;">Page <span id="currentPage">1</span> of <span id="totalPages">1</span></span>
+                <button class="pagination-btn" id="nextPage" onclick="goToNextPage()">
+                    <svg viewBox="0 0 16 16">
+                        <path d="M8.7813 8.00047L5.48145 4.70062L6.42426 3.75781L10.6669 8.00047L6.42426 12.2431L5.48145 11.3003L8.7813 8.00047Z" fill="currentColor" />
+                    </svg>
+                </button>
+                <button class="pagination-btn" id="lastPage" onclick="goToLastPage()">
+                    <svg viewBox="0 0 16 16">
+                        <path d="M6.72387 8L3.52861 11.1953L4.47141 12.1381L8.60947 8L4.47141 3.86194L3.52861 4.80475L6.72387 8ZM11.3333 4.00001V12H10V4.00001H11.3333Z" fill="currentColor" />
+                    </svg>
+                </button>
+            </div>
+            </div>
+
+            <div class="table-actions">
+                <button class="export-btn">
+                    <svg viewBox="0 0 16 16">
+                        <path d="M2.66667 12.6667H13.3333V8H14.6667V13.3333C14.6667 13.7015 14.3682 14 14 14H2C1.63181 14 1.33333 13.7015 1.33333 13.3333V8H2.66667V12.6667ZM8.66667 6V10.6667H7.33333V6H4L8 2L12 6H8.66667Z" fill="currentColor" />
+                    </svg>
+                    Export
+                </button>
+
+                <a href="@Url.Action("Create", "User")" class="add-btn">
+                    <svg viewBox="0 0 20 20" fill="white" width="16" height="16">
+                        <path d="M10.8333 9.16667V3.33333H9.16667V9.16667H3.33333V10.8333H9.16667V16.6667H10.8333V10.8333H16.6667V9.16667H10.8333Z" />
+                    </svg>
+                    Add
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Placeholder content for other tabs -->
+<div id="work-request-content" class="tab-content-container hidden">
+    <div class="table-container">
+        <div class="tab-content">
+            <div>
+                <h3>Work Request Management</h3>
+                <p>Work request content will be displayed here.</p>
+                <p>This would include work request forms, tracking, and management.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="pre-inspection-content" class="tab-content-container hidden">
+    <div class="table-container">
+        <div class="tab-content">
+            <div>
+                <h3>Pre-Inspection Management</h3>
+                <p>Pre-inspection forms and checklists will be displayed here.</p>
+                <p>This section manages pre-inspection processes.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="work-order-content" class="tab-content-container hidden">
+    <div class="table-container">
+        <div class="tab-content">
+            <div>
+                <h3>Work Order Management</h3>
+                <p>Work order management content will be displayed here.</p>
+                <p>This section handles work order creation, assignment, and tracking.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="invoicing-content" class="tab-content-container hidden">
+    <div class="table-container">
+        <div class="tab-content">
+            <div>
+                <h3>Invoicing Management</h3>
+                <p>Invoicing and billing content will be displayed here.</p>
+                <p>This section manages invoices, payments, and billing records.</p>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    function onDataBinding(arg) {
-        if ($("#UserListGrid").data("kendoGrid").dataSource.data().length > 0) {
-            $("#btnExcelUser").show();
-            $("#btnPdfUser").show();
-        } else {
-            $("#UserListGrid").find('.k-grid-content').css("overflow-y", "hidden");
-            $("#UserListGrid").find('.k-grid-content').css("overflow-x", "hidden");
-            $("#btnExcelUser").hide();
-            $("#btnPdfUser").hide();
-        }
-    }
-    var companyId = '@ViewBag.Tenant';
-    $(document).ready(function () {
-        $("#tenantDdl").val('@ViewBag.Tenant');
-        $("li.active").removeClass("active");
-        $("#UserList").addClass("active");
-        $("#AddUser").click(function () {
-            location.href = '@Url.Action("UserDetail", "SGEAdmin")'+'?allowEdit=true';
-        });
+    // Tab switching functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize pagination FIRST
+        initializePagination();
 
-        $("#btnExcelUser").click(function () {
-            window.location.href = '@Url.Action("ExportToExcelForUserList", "SGEAdmin")';
-        });
+        // Then set up tabs
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.table-container');
 
-        $("#btnPdfUser").click(function () {
-            window.location.href = '@Url.Action("ExportToPdfForUserList", "SGEAdmin")';
-        });
+        // Add click event listeners to tabs
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabName = this.getAttribute('data-tab');
 
-        $("#tenantDdl").change(function () {
-            companyId = $("#tenantDdl").val();
-            var ds = $("#UserListGrid").data("kendoGrid").dataSource;
-            ds.read();
-        });
-    });
-    function additionalInfo() {
-        return {
-            companyId: companyId
-        }
-    }
-    function DeleteUser(userId) {
-        $('#deleteUserConfirmationModal').modal('show');
-        $('#deleteUserConfirmationModal').find('.modal-body #deleteConfirmOk').on('click', function () {
-            $.ajax({
-                url: '@Url.Action("DeleteUser", "SGEAdmin")',
-                type: 'POST',
-                data: { userId: userId },
-                success: function (result) {
-                    $('#deleteUserConfirmationModal').modal('hide');
-                    $('#deleteUserConfirmModal').modal('show');
-                    $('#deleteUserMessage').html(result.message);
+                // Remove active class from all tabs
+                tabs.forEach(t => t.classList.remove('active'));
 
-                    var ds = $("#UserListGrid").data("kendoGrid").dataSource;
-                    ds.read();
+                // Add active class to clicked tab
+                this.classList.add('active');
+
+                // Hide all tab contents
+                tabContents.forEach(content => {
+                    content.classList.add('hidden');
+                });
+
+                // Show selected tab content
+                const activeContent = document.getElementById(`${tabName}-content`);
+                if (activeContent) {
+                    activeContent.classList.remove('hidden');
                 }
             });
         });
+    });
+
+    // Pagination Variables
+    let currentPage = 1;
+    let rowsPerPage = 10;
+    let allRows = [];
+
+    function initializePagination() {
+        console.log('Initializing pagination...');
+
+        // Get all data rows
+        allRows = Array.from(document.querySelectorAll('#tableBody tr.data-row'));
+        console.log('Found data rows:', allRows.length);
+
+        // Get the no data row if it exists
+        const noDataRow = document.querySelector('#tableBody tr:not(.data-row)');
+
+        // Set initial rows per page from select
+        const pageSizeSelect = document.getElementById('pageSizeSelect');
+        if (pageSizeSelect) {
+            rowsPerPage = parseInt(pageSizeSelect.value);
+        }
+
+        // If no data rows exist
+        if (allRows.length === 0) {
+            console.log('No data rows found');
+            if (noDataRow) {
+                noDataRow.classList.add('visible-row');
+            }
+            updatePaginationInfo();
+            updatePaginationControls();
+            return;
+        }
+
+        console.log('Total rows:', allRows.length, 'Rows per page:', rowsPerPage);
+
+        // Show first page
+        showPage(1);
+        updatePaginationInfo();
+        updatePaginationControls();
     }
-    
+
+    function showPage(page) {
+        console.log('Showing page:', page);
+        const startIndex = (page - 1) * rowsPerPage;
+        const endIndex = startIndex + rowsPerPage;
+
+        // Remove visible class from all rows
+        allRows.forEach(row => {
+            row.classList.remove('visible-row');
+        });
+
+        // Show rows for current page
+        const rowsToShow = allRows.slice(startIndex, endIndex);
+        rowsToShow.forEach(row => {
+            row.classList.add('visible-row');
+        });
+
+        console.log('Showing rows:', startIndex + 1, 'to', Math.min(endIndex, allRows.length));
+    }
+
+    function updatePaginationInfo() {
+        const totalRows = allRows.length;
+        const startIndex = (currentPage - 1) * rowsPerPage + 1;
+        const endIndex = Math.min(currentPage * rowsPerPage, totalRows);
+        const totalPages = Math.ceil(totalRows / rowsPerPage);
+
+        if (document.getElementById('startRow')) {
+            document.getElementById('startRow').textContent = totalRows > 0 ? startIndex : 0;
+        }
+        if (document.getElementById('endRow')) {
+            document.getElementById('endRow').textContent = totalRows > 0 ? endIndex : 0;
+        }
+        if (document.getElementById('totalRows')) {
+            document.getElementById('totalRows').textContent = totalRows;
+        }
+        if (document.getElementById('currentPage')) {
+            document.getElementById('currentPage').textContent = currentPage;
+        }
+        if (document.getElementById('totalPages')) {
+            document.getElementById('totalPages').textContent = totalPages || 1;
+        }
+    }
+
+    function updatePaginationControls() {
+        const totalRows = allRows.length;
+        const totalPages = Math.ceil(totalRows / rowsPerPage);
+
+        const firstPageBtn = document.getElementById('firstPage');
+        const prevPageBtn = document.getElementById('prevPage');
+        const nextPageBtn = document.getElementById('nextPage');
+        const lastPageBtn = document.getElementById('lastPage');
+
+        if (firstPageBtn) {
+            firstPageBtn.disabled = currentPage === 1 || totalRows === 0;
+        }
+        if (prevPageBtn) {
+            prevPageBtn.disabled = currentPage === 1 || totalRows === 0;
+        }
+        if (nextPageBtn) {
+            nextPageBtn.disabled = currentPage === totalPages || totalRows === 0;
+        }
+        if (lastPageBtn) {
+            lastPageBtn.disabled = currentPage === totalPages || totalRows === 0;
+        }
+    }
+
+    // Pagination functions
+    function goToFirstPage() {
+        if (currentPage !== 1 && allRows.length > 0) {
+            currentPage = 1;
+            showPage(currentPage);
+            updatePaginationInfo();
+            updatePaginationControls();
+        }
+    }
+
+    function goToPrevPage() {
+        if (currentPage > 1 && allRows.length > 0) {
+            currentPage--;
+            showPage(currentPage);
+            updatePaginationInfo();
+            updatePaginationControls();
+        }
+    }
+
+    function goToNextPage() {
+        const totalPages = Math.ceil(allRows.length / rowsPerPage);
+        if (currentPage < totalPages && allRows.length > 0) {
+            currentPage++;
+            showPage(currentPage);
+            updatePaginationInfo();
+            updatePaginationControls();
+        }
+    }
+
+    function goToLastPage() {
+        const totalPages = Math.ceil(allRows.length / rowsPerPage);
+        if (currentPage !== totalPages && allRows.length > 0) {
+            currentPage = totalPages;
+            showPage(currentPage);
+            updatePaginationInfo();
+            updatePaginationControls();
+        }
+    }
+
+    // Handle page size change
+    const pageSizeSelect = document.getElementById('pageSizeSelect');
+    if (pageSizeSelect) {
+        pageSizeSelect.addEventListener('change', function() {
+            rowsPerPage = parseInt(this.value);
+            currentPage = 1;
+            showPage(currentPage);
+            updatePaginationInfo();
+            updatePaginationControls();
+        });
+    }
+
+    // Export functionality
+    const exportBtn = document.querySelector('.export-btn');
+    if (exportBtn) {
+        exportBtn.addEventListener('click', function() {
+            alert('Export functionality would be implemented here');
+        });
+    }
 </script>
-<div class="modal fade" id="deleteUserConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog deleteModalPopup">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Delete</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-body">
-                <h4>DeleteConfirmMessage</h4>
-                <button class="btn" id="deleteConfirmOk">Ok</button>
-                <button class="btn " data-dismiss="modal" id="deleteConfirmCancel">Cancel</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="deleteUserConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog deleteModalPopup">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Delete</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-body">
-                <h4 id="deleteUserMessage"></h4>
-                <button class="btn" data-dismiss="modal">Ok</button>
-            </div>
-        </div>
-    </div>
-</div>

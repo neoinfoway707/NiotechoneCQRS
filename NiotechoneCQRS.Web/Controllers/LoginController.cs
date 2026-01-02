@@ -38,7 +38,9 @@ public class LoginController : Controller
             await LoadCompanies();
             return View("Index", login);
         }
-
+        HttpContext.Session.SetString("UserName", result!.User!.UserName);
+        HttpContext.Session.SetString("Company", result!.User!.CompanyName);
+        HttpContext.Session.SetInt32("CompanyId", (int)result!.User!.CompanyId);
         HttpContext.Session.SetString("JwtToken", result!.Token!);
         HttpContext.Session.SetInt32(
             "UserRoleId",
