@@ -110,8 +110,8 @@ public class UserRepository : IUserRepository
 
             if (!string.IsNullOrWhiteSpace(user.PasswordDecrypt))
             {
-                sql = sql.Replace("/**PASSWORD**/", ", PasswordDecrypt = @Password");
-                parameters.Add("Password", user.PasswordDecrypt);
+                sql = sql.Replace("/**PASSWORD**/", ", PasswordDecrypt = @PasswordDecrypt");
+                parameters.Add("PasswordDecrypt", user.PasswordDecrypt);
             }
             else
             {

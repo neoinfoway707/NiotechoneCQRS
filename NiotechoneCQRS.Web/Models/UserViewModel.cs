@@ -33,4 +33,7 @@ public class UserViewModel
 
     [Required(ErrorMessage = "User type is required.")]
     public int? UserTypeId { get; set; }
+
+    [Required(ErrorMessage = "Password is required.")]
+    public string PasswordDecrypt { get; set; }
 }

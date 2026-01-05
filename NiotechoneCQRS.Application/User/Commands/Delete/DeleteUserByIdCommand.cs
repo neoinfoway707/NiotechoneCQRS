@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using NiotechoneCQRS.Application.DTOs.ResponseDTOs;
 using NiotechoneCQRS.Domain.Interfaces;
-using NiotechoneCQRS.Utility.AppResource;
+using NiotechoneCQRS.Utility.CommonResource;
 using System.Net;
 
 namespace NiotechoneCQRS.Application.User.Commands.Delete;
