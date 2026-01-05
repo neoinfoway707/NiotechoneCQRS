@@ -1,49 +1,258 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@using NiotechoneCQRS.Application
+@using NiotechoneCQRS.Application.Enum
+@using static NiotechoneCQRS.Application.Enum.Enums
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    var userRoleId = Context.Session.GetInt32("UserRoleId");
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - NiotechoneCQRS.Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/NiotechoneCQRS.Web.styles.css" asp-append-version="true" />
+    <title>@ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" />
+
+    <!-- Custom CSS -->
+    <link href="~/css/sidebar.css" rel="stylesheet" />
+    @* <link href="~/css/user.css" rel="stylesheet" /> *@
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">NiotechoneCQRS.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+
+    <div class="app-layout">
+
+        <!-- ================= LEFT SIDEBAR ================= -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo"></div>
+                <div class="sidebar-toggle" onclick="toggleSidebar()">
+                    <i class="fa fa-bars"></i>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
+            <ul class="menu">
+
+                @if (userRoleId == (int)UserRole.SuperAdmin)
+                {
+                    <li class="@IsActive("Company")">
+                        <a asp-controller="Company" asp-action="Index">
+                            <i class="fa fa-building"></i>
+                            <span>Companies</span>
+                        </a>
+                    </li>
+
+                    <li class="@IsActive("User")">
+                        <a asp-controller="User" asp-action="Index">
+                            <i class="fa fa-users"></i>
+                            <span>Users</span>
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="@IsActive("Dashboard")">
+                        <a asp-controller="Dashboard" asp-action="Index">
+                            <i class="fa fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="@IsActive("WorkOrder")">
+                        <a asp-controller="WorkOrder" asp-action="Index">
+                            <i class="fa fa-briefcase"></i>
+                            <span>Work Order</span>
+                        </a>
+                    </li>
+
+                    <li class="@IsActive("Sales")">
+                        <a asp-controller="Sales" asp-action="Index">
+                            <i class="fa fa-chart-line"></i>
+                            <span>Sales</span>
+                        </a>
+                    </li>
+
+                    <li class="@IsActive("PPM")">
+                        <a asp-controller="PPM" asp-action="Index">
+                            <i class="fa fa-user"></i>
+                            <span>PPM</span>
+                        </a>
+                    </li>
+
+                    <li class="@IsActive("Scheduling")">
+                        <a asp-controller="Scheduling" asp-action="Index">
+                            <i class="fa fa-calendar"></i>
+                            <span>Scheduling</span>
+                        </a>
+                    </li>
+
+                    <li class="@IsActive("Assets")">
+                        <a asp-controller="Assets" asp-action="Index">
+                            <i class="fa fa-box"></i>
+                            <span>Assets</span>
+                        </a>
+                    </li>
+
+                    <li class="@IsActive("Personnel")">
+                        <a asp-controller="Personnel" asp-action="Index">
+                            <i class="fa fa-users"></i>
+                            <span>Personnel</span>
+                        </a>
+                    </li>
+
+                    <li class="@IsActive("Activity")">
+                        <a asp-controller="Activity" asp-action="Index">
+                            <i class="fa fa-layer-group"></i>
+                            <span>Activity Overview</span>
+                        </a>
+                    </li>
+
+                    <li class="@IsActive("Clients")">
+                        <a asp-controller="Clients" asp-action="Index">
+                            <i class="fa fa-building"></i>
+                            <span>Clients</span>
+                        </a>
+                    </li>
+
+                    <li class="@IsActive("JobOrders")">
+                        <a asp-controller="JobOrders" asp-action="Index">
+                            <i class="fa fa-file"></i>
+                            <span>Job Orders</span>
+                        </a>
+                    </li>
+
+                    <li class="@IsActive("Inventory")">
+                        <a asp-controller="Inventory" asp-action="Index">
+                            <i class="fa fa-warehouse"></i>
+                            <span>Inventory</span>
+                        </a>
+                    </li>
+
+                    <li class="@IsActive("KPI")">
+                        <a asp-controller="KPI" asp-action="Index">
+                            <i class="fa fa-chart-pie"></i>
+                            <span>KPI</span>
+                        </a>
+                    </li>
+                }
+
+            </ul>
+        </aside>
+
+        <!-- ================= RIGHT CONTENT ================= -->
+        <main class="content">
+
+            <!-- TOP HEADER -->
+            <header class="top-header">
+
+                <!-- LEFT SIDE -->
+                <div class="header-left">
+                    <div class="page-title-show">
+                        @if (ViewBag.ShowBackButton == true)
+                        {
+                            <button class="back-btn">
+                                <svg viewBox="0 0 24 24" class="back-icon" fill="none">
+                                    <path d="M9 6L3 12L9 18"
+                                          stroke="currentColor"
+                                          stroke-width="2.2"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round" />
+                                    <path d="M21 12H4"
+                                          stroke="currentColor"
+                                          stroke-width="2.2"
+                                          stroke-linecap="round" />
+                                </svg>
+                            </button>
+                        }
+
+                        <h2>@ViewBag.PageTitle</h2>
+                    </div>
+
+                    <div class="breadcrumb">
+                        @Html.Raw(ViewBag.Breadcrumb)
+                    </div>
+                </div>
+
+                <!-- RIGHT SIDE -->
+                <div class="header-right">
+
+                    <div class="lang-user">
+                        <span class="lang">English | Urdu</span>
+
+                        <button class="icon-btn">
+                            <i class="fa-regular fa-bell"></i>
+                        </button>
+
+                        <form method="post">
+                            <button class="avatar-btn" type="submit" asp-controller="Login" asp-action="Logout">
+                            <img src="/images/avatar.png" alt="User" />
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        </form>
+                    </div>
+
+                    <div class="filters">
+                        @RenderSection("HeaderFilters", required: false)
+                    </div>
+
+
+                </div>
+
+            </header>
+
+            <!-- PAGE CONTENT -->
+            <section class="page-content">
+                @RenderBody()
+            </section>
+
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - NiotechoneCQRS.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <!-- ================= SCRIPTS ================= -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.querySelector(".sidebar");
+            if (!sidebar) return;
+            sidebar.classList.toggle("collapsed");
+        }
+    </script>
+
 </body>
 </html>
+
+@functions {
+    string IsActive(string controller, string action = "")
+    {
+        var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+        var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+
+        if (!string.IsNullOrEmpty(action))
+        {
+            return controller == currentController && action == currentAction ? "active" : "";
+        }
+        return controller == currentController ? "active" : "";
+    }
+}

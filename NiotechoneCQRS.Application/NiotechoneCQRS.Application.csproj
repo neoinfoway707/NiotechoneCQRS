@@ -7,8 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="16.0.0" />
+    <PackageReference Include="FluentValidation" Version="12.1.1" />
+    <PackageReference Include="MediatR" Version="14.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\NiotechoneCQRS.Domain\NiotechoneCQRS.Domain.csproj" />
     <ProjectReference Include="..\NiotechoneCQRS.Infrastructure\NiotechoneCQRS.Infrastructure.csproj" />
+    <ProjectReference Include="..\NiotechoneCQRS.Utility\NiotechoneCQRS.Utility.csproj" />
   </ItemGroup>
 
 </Project>
