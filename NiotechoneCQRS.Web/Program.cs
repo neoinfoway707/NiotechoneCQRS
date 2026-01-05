@@ -16,6 +16,8 @@ builder.Services.AddSession(options =>
 });
 //builder.Services.AddKendo();
 
+builder.Services.AddHttpContextAccessor();
+
 string baseUrl = builder.Configuration["baseUrl"];
 
 builder.Services.AddSingleton(new AppSettings

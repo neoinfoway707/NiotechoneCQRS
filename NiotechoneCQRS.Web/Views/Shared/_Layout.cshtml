@@ -253,7 +253,6 @@
         {
             return controller == currentController && action == currentAction ? "active" : "";
         }
-
-    @RenderSection("Scripts", required: false)
-</body>
-</html>
+        return controller == currentController ? "active" : "";
+    }
+}
