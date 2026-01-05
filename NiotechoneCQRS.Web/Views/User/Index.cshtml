@@ -1,6 +1,11 @@
 ﻿@using NiotechoneCQRS.Application.DTOs.ResponseDTOs
 @using UserRes = NiotechoneCQRS.Utility.User.User
 @using CommonRes = NiotechoneCQRS.Utility.CommonResource.AppResource
+@{
+    ViewBag.PageTitle = UserRes.UserList;
+    ViewBag.ShowBackButton = true;
+    ViewBag.Breadcrumb = $"<i class='fa fa-folder'></i> {UserRes.UserList}";
+}
 @model UserListModelDTO
 
 @{

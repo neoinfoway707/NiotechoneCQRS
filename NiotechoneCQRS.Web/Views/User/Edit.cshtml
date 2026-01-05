@@ -1,6 +1,11 @@
 ﻿@using NiotechoneCQRS.Web.Models
 @using UserRes = NiotechoneCQRS.Utility.User.User
 @using CommonRes = NiotechoneCQRS.Utility.CommonResource.AppResource
+@{
+    ViewBag.PageTitle = UserRes.UserEdit;
+    ViewBag.ShowBackButton = true;
+    ViewBag.Breadcrumb = $"<i class='fa fa-folder'></i> {UserRes.UserList} <span class='sep'>/</span> <strong> {UserRes.UserEdit} </strong>";
+}
 @model UserViewModel
 
 @{
