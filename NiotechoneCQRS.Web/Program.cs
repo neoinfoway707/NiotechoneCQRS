@@ -13,7 +13,7 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
-builder.Services.AddKendo();
+//builder.Services.AddKendo();
 
 string baseUrl = builder.Configuration["baseUrl"];
 

@@ -15,11 +15,5 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Kendo.Mvc">
-      <HintPath>C:\Users\ADMIN\Downloads\wetransfer_kendo-mvc_x86_2025-12-31_0430\Kendo.Mvc_x86\Kendo.Mvc.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 
 </Project>

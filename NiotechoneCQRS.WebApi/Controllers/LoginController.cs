@@ -6,7 +6,7 @@ using NiotechoneCQRS.Application.DTOs.RequestDTOs;
 using NiotechoneCQRS.Application.Login.Update;
 using NiotechoneCQRS.Application.User.Commands.CheckUserValidatity;
 using NiotechoneCQRS.Domain.Entities;
-using NiotechoneCQRS.Utility.AppResource;
+using NiotechoneCQRS.Utility.CommonResource;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;

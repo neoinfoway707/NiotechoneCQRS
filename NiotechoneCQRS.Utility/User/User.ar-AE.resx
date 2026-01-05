@@ -117,15 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="LoginError" xml:space="preserve">
-    <value>Login Error</value>
-    <comment>Login Error</comment>
+  <data name="Actions" xml:space="preserve">
+    <value>الإجراءات</value>
   </data>
-  <data name="LoginSuccess" xml:space="preserve">
-    <value>Login Success</value>
-    <comment>Login Success</comment>
+  <data name="Active" xml:space="preserve">
+    <value>نشيط</value>
   </data>
-  <data name="Notfound" xml:space="preserve">
-    <value>Not found</value>
+  <data name="Address" xml:space="preserve">
+    <value>عنوان</value>
+  </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>إضافة مستخدم</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>شركة</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>بريد إلكتروني</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>الاسم الكامل</value>
+  </data>
+  <data name="Inactive" xml:space="preserve">
+    <value>غير نشط</value>
+  </data>
+  <data name="LastLogin" xml:space="preserve">
+    <value>تسجيل الدخول الأخير</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>هاتف</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>حالة</value>
+  </data>
+  <data name="UserEdit" xml:space="preserve">
+    <value>تحرير المستخدم</value>
+  </data>
+  <data name="UserList" xml:space="preserve">
+    <value>قائمة المستخدمين</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>اسم المستخدم</value>
+  </data>
+  <data name="UserRole" xml:space="preserve">
+    <value>دور المستخدم</value>
+  </data>
+  <data name="UserType" xml:space="preserve">
+    <value>نوع المستخدم</value>
   </data>
 </root>
