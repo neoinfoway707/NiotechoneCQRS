@@ -2,7 +2,7 @@
 
 namespace NiotechoneCQRS.Web.Controllers;
 
-public class AdminController : Controller
+public class CompanyController : Controller
 {
     public IActionResult Index()
     {
