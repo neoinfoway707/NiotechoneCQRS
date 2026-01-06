@@ -26,5 +26,12 @@
 
         public const string GetKpiList = "get-kpi-list";
         public const string SaveKpiList = "save-kpi-list";
+
+        public const string ConfigurationList = "configuration-list/CompanyId";
+        public const string UpdateConfigurationList = "update-configuration-list/id";
+        public const string SaveSystemConfigurationValue = "save-systemConfigurationValue";
+
+        public const string GetParameterValues = "get-parameter-values";
+        public const string GetConfigMasterByKey = "get-ConfigMasterByKey";
     }
 }
