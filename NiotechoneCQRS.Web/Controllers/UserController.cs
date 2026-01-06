@@ -1,9 +1,6 @@
-﻿using Kendo.Mvc.Extensions;
-using Kendo.Mvc.UI;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using NiotechoneCQRS.Application.ApiRoutes;
 using NiotechoneCQRS.Application.DTOs.ResponseDTOs;
-using NiotechoneCQRS.Domain.Entities;
 using NiotechoneCQRS.Web.Helper;
 using NiotechoneCQRS.Web.Models;
 
@@ -25,29 +22,29 @@ namespace NiotechoneCQRS.Web.Controllers
             return View(userList);
         }
 
-        public async Task<IActionResult> GetUserList([DataSourceRequest] DataSourceRequest request)
-        {
-            string url = _setting.BaseUrl + ApiRoutes.GetAllUsers;
-            var userList = await _apiClient.GetAsync<UserListModelDTO>(url);
-            var userView = (userList?.data ?? Enumerable.Empty<Datum>())
-                .Select(x => new UserModel
-                {
-                    CompanyId = x.companyId,
-                    UserId = x.userId,
-                    FullName = x.fullName,
-                    UserName = x.userName,
-                    StatusName = x.statusName?.ToString() ?? "",
-                    Email = x.email,
-                    Phone = x.phone,
-                    Address = x.address,
-                    LastLoginDate = x.lastLoginDate.ToString(),
-                    PersonalTypeId = x.personalTypeId as int?
-                })
-                .AsQueryable(); // Important for Kendo server-side operations
+        //public async Task<IActionResult> GetUserList([DataSourceRequest] DataSourceRequest request)
+        //{
+        //    string url = _setting.BaseUrl + ApiRoutes.GetAllUsers;
+        //    var userList = await _apiClient.GetAsync<UserListModelDTO>(url);
+        //    var userView = (userList?.data ?? Enumerable.Empty<Datum>())
+        //        .Select(x => new UserModel
+        //        {
+        //            CompanyId = x.companyId,
+        //            UserId = x.userId,
+        //            FullName = x.fullName,
+        //            UserName = x.userName,
+        //            StatusName = x.statusName?.ToString() ?? "",
+        //            Email = x.email,
+        //            Phone = x.phone,
+        //            Address = x.address,
+        //            LastLoginDate = x.lastLoginDate.ToString(),
+        //            PersonalTypeId = x.personalTypeId as int?
+        //        })
+        //        .AsQueryable(); // Important for Kendo server-side operations
 
-            // Return data with paging, sorting, filtering
-            return Json(userView.ToDataSourceResult(request));
-        }
+        //    // Return data with paging, sorting, filtering
+        //    return Json(userView.ToDataSourceResult(request));
+        //}
 
         [HttpGet]
         public async Task<IActionResult> Create()

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using NiotechoneCQRS.Application.DTOs.ResponseDTOs;
 using NiotechoneCQRS.Domain.Entities;
@@ -121,7 +120,7 @@ public class UpdateCompanyCommandHandler : IRequestHandler<UpdateCompanyCommand,
                 Filename = request.HeaderFile.HeaderFileName,
                 CompanyImage = request.HeaderFile.HeaderContent,
                 ContentType = request.HeaderFile.HeaderContentType,
-                ArtifactType = (int)Enum.Enums.ArtifactType.CompanyHeader,
+                ArtifactType = (int)Domain.Enum.Enums.ArtifactType.CompanyHeader,
                 UpdatedBy = userId
             });
         }
@@ -133,7 +132,7 @@ public class UpdateCompanyCommandHandler : IRequestHandler<UpdateCompanyCommand,
                 Filename = request.FooterFile.FooterFileName,
                 CompanyImage = request.FooterFile.FooterContent,
                 ContentType = request.FooterFile.FooterContentType,
-                ArtifactType = (int)Enum.Enums.ArtifactType.CompanyFooter,
+                ArtifactType = (int)Domain.Enum.Enums.ArtifactType.CompanyFooter,
                 UpdatedBy = userId
             });
         }

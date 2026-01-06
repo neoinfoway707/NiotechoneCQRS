@@ -41,4 +41,8 @@ public class Company
 
     public virtual Country Country { get; set; }
     public virtual ICollection<CompanyArtifact> CompanyArtifacts { get; set; }
+    public virtual ICollection<UserRole> UserRoles { get; set; }
+    public virtual ICollection<User> Users { get; set; }
+    public virtual ICollection<ConfigManagerValue> ConfigManagerValues { get; set; }
+    public virtual ICollection<KPIAllocation> KPIAllocations { get; set; }
 }

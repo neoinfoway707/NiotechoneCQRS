@@ -1,9 +1,9 @@
 ﻿@using NiotechoneCQRS.Application.DTOs.ResponseDTOs
-@model UserListModelDTO
+@model UserRoleListModel
 
 @{
-    ViewData["Title"] = "Users";
-    ViewBag.PageTitle = "Users";
+    ViewData["Title"] = "Roles";
+    ViewBag.PageTitle = "Roles";
 }
 <link href="~/css/user.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
@@ -11,17 +11,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Inter:wght@400;500;600&family=Wix+Madefor+Display:wght@400&display=swap" rel="stylesheet">
 
-
-<!-- Tabs Navigation with exact master design -->
 <div class="tabs">
-    <a class="tab active" data-tab="quotation" href="/User/Index">Quotation</a>
-    <div class="tab" data-tab="work-request">Work Request</div>
+    <a class="tab active" data-tab="Roles" href="/UserRole/Index">@ViewData["Title"]</a>
+    @* <div class="tab" data-tab="work-request">Work Request</div>
     <div class="tab" data-tab="pre-inspection">Pre-Inspection</div>
     <div class="tab" data-tab="work-order">Work Order</div>
-    <div class="tab" data-tab="invoicing">Invoicing</div>
+    <div class="tab" data-tab="invoicing">Invoicing</div> *@
 </div>
 
-<!-- Quotation Tab Content -->
 <div id="quotation-content" class="tab-content-container">
     <div class="table-container">
         <!-- Table Header with Add Button -->
@@ -39,49 +36,19 @@
             <thead>
                 <tr>
                     <th>
-                        <span>Full Name</span>
+                        <span>Title</span>
                         <svg class="filter-icon" viewBox="0 0 16 16">
                             <path d="M6.66667 12H9.33333V10.6667H6.66667V12ZM2 4V5.33333H14V4H2ZM4 8.66667H12V7.33333H4V8.66667Z" fill="#64748B" />
                         </svg>
                     </th>
                     <th>
-                        <span>User Name</span>
+                        <span>Description</span>
                         <svg class="filter-icon" viewBox="0 0 16 16">
                             <path d="M6.66667 12H9.33333V10.6667H6.66667V12ZM2 4V5.33333H14V4H2ZM4 8.66667H12V7.33333H4V8.66667Z" fill="#64748B" />
                         </svg>
                     </th>
                     <th>
-                        <span>Email</span>
-                        <svg class="filter-icon" viewBox="0 0 16 16">
-                            <path d="M6.66667 12H9.33333V10.6667H6.66667V12ZM2 4V5.33333H14V4H2ZM4 8.66667H12V7.33333H4V8.66667Z" fill="#64748B" />
-                        </svg>
-                    </th>
-                    <th>
-                        <span>Status</span>
-                        <svg class="filter-icon" viewBox="0 0 16 16">
-                            <path d="M6.66667 12H9.33333V10.6667H6.66667V12ZM2 4V5.33333H14V4H2ZM4 8.66667H12V7.33333H4V8.66667Z" fill="#64748B" />
-                        </svg>
-                    </th>
-                    <th>
-                        <span>User Role</span>
-                        <svg class="filter-icon" viewBox="0 0 16 16">
-                            <path d="M6.66667 12H9.33333V10.6667H6.66667V12ZM2 4V5.33333H14V4H2ZM4 8.66667H12V7.33333H4V8.66667Z" fill="#64748B" />
-                        </svg>
-                    </th>
-                    <th>
-                        <span>Address</span>
-                        <svg class="filter-icon" viewBox="0 0 16 16">
-                            <path d="M6.66667 12H9.33333V10.6667H6.66667V12ZM2 4V5.33333H14V4H2ZM4 8.66667H12V7.33333H4V8.66667Z" fill="#64748B" />
-                        </svg>
-                    </th>
-                    <th>
-                        <span>Phone</span>
-                        <svg class="filter-icon" viewBox="0 0 16 16">
-                            <path d="M6.66667 12H9.33333V10.6667H6.66667V12ZM2 4V5.33333H14V4H2ZM4 8.66667H12V7.33333H4V8.66667Z" fill="#64748B" />
-                        </svg>
-                    </th>
-                    <th>
-                        <span>Last Login</span>
+                        <span>Permissions</span>
                         <svg class="filter-icon" viewBox="0 0 16 16">
                             <path d="M6.66667 12H9.33333V10.6667H6.66667V12ZM2 4V5.33333H14V4H2ZM4 8.66667H12V7.33333H4V8.66667Z" fill="#64748B" />
                         </svg>
@@ -102,56 +69,23 @@
                     {
                         <tr class="data-row">
                             <td>
-                                <a href="/User/Detail/@emp.userId" class="user-link">@emp.fullName</a>
+                                @* <a href="/User/Detail/@emp.userId" class="user-link">@emp.fullName</a> *@
+                                @emp.RoleName
                             </td>
-                            <td>@emp.userName</td>
-                            <td>@emp.email</td>
+                            <td>@emp.Description</td>
                             <td>
-                                @{
-                                    string statusClass = "pending";
-                                    string statusText = "Pending";
-
-                                    if (emp.statusId == 1)
-                                    {
-                                        statusClass = "active";
-                                        statusText = "Active";
-                                    }
-                                    else if (emp.statusId == 0)
-                                    {
-                                        statusClass = "inactive";
-                                        statusText = "Inactive";
-                                    }
-                                }
-                                <span class="status @statusClass">
-                                    @statusText
-                                </span>
-                            </td>
-                            <td>@emp.userRoleId</td>
-                            <td>@emp.address</td>
-                            <td>@emp.phone</td>
-                            <td>
-                                @{
-                                    string lastLogin = "Never";
-                                    if (emp.lastLoginDate != null)
-                                    {
-                                        try
-                                        {
-                                            lastLogin = ((DateTime)emp.lastLoginDate).ToString("MMM dd, yyyy");
-                                        }
-                                        catch
-                                        {
-                                            lastLogin = emp.lastLoginDate.ToString();
-                                        }
-                                    }
-                                }
-                                @lastLogin
+                                <a asp-controller="Permission"
+                                   asp-action="Index"
+                                   asp-route-roleId="@emp.UserRoleId">
+                                    Permissions
+                                </a>
                             </td>
                             <td>
                                 <div style="display: flex; gap: 4px;">
-                                    <a href="/User/Edit/@emp.userId" class="action-btn btn-edit" title="Edit">
+                                    <a href="/UserRole/Edit/@emp.UserRoleId" class="action-btn btn-edit" title="Edit">
                                         <i class="bi bi-pencil"></i>
                                     </a>
-                                    <form method="post" action="/User/Delete/@emp.userId" onsubmit="return confirm('Are you sure you want to delete this user?');" style="display:inline;">
+                                    <form method="post" action="/UserRole/Delete/@emp.UserRoleId" onsubmit="return confirm('Are you sure you want to delete this user?');" style="display:inline;">
                                         <button type="submit" class="action-btn btn-delete" title="Delete">
                                             <i class="bi bi-trash"></i>
                                         </button>
@@ -175,39 +109,39 @@
         <!-- Table Footer with Pagination -->
         <div class="table-footer">
             <div class="footer-left">
-            <div class="pagination-info">
-                <span>Showing <span id="startRow">1</span> - <span id="endRow">10</span> of <span id="totalRows">@totalCount</span></span>
-                <select class="page-size-select" id="pageSizeSelect">
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-            </div>            
+                <div class="pagination-info">
+                    <span>Showing <span id="startRow">1</span> - <span id="endRow">10</span> of <span id="totalRows">@totalCount</span></span>
+                    <select class="page-size-select" id="pageSizeSelect">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
 
-            <div class="pagination-controls">
-                <button class="pagination-btn" id="firstPage" onclick="goToFirstPage()">
-                    <svg viewBox="0 0 16 16">
-                        <path d="M6.72387 8L3.52861 11.1953L4.47141 12.1381L8.60947 8L4.47141 3.86194L3.52861 4.80475L6.72387 8ZM11.3333 4.00001V12H10V4.00001H11.3333Z" fill="currentColor" transform="rotate(180 8 8)" />
-                    </svg>
-                </button>
-                <button class="pagination-btn" id="prevPage" onclick="goToPrevPage()">
-                    <svg viewBox="0 0 16 16">
-                        <path d="M8.7813 8.00047L5.48145 4.70062L6.42426 3.75781L10.6669 8.00047L6.42426 12.2431L5.48145 11.3003L8.7813 8.00047Z" fill="currentColor" transform="rotate(180 8 8)" />
-                    </svg>
-                </button>
-                <span class="page-number-text" style="padding: 8px 12px; color: #64748B; display: none;">Page <span id="currentPage">1</span> of <span id="totalPages">1</span></span>
-                <button class="pagination-btn" id="nextPage" onclick="goToNextPage()">
-                    <svg viewBox="0 0 16 16">
-                        <path d="M8.7813 8.00047L5.48145 4.70062L6.42426 3.75781L10.6669 8.00047L6.42426 12.2431L5.48145 11.3003L8.7813 8.00047Z" fill="currentColor" />
-                    </svg>
-                </button>
-                <button class="pagination-btn" id="lastPage" onclick="goToLastPage()">
-                    <svg viewBox="0 0 16 16">
-                        <path d="M6.72387 8L3.52861 11.1953L4.47141 12.1381L8.60947 8L4.47141 3.86194L3.52861 4.80475L6.72387 8ZM11.3333 4.00001V12H10V4.00001H11.3333Z" fill="currentColor" />
-                    </svg>
-                </button>
-            </div>
+                <div class="pagination-controls">
+                    <button class="pagination-btn" id="firstPage" onclick="goToFirstPage()">
+                        <svg viewBox="0 0 16 16">
+                            <path d="M6.72387 8L3.52861 11.1953L4.47141 12.1381L8.60947 8L4.47141 3.86194L3.52861 4.80475L6.72387 8ZM11.3333 4.00001V12H10V4.00001H11.3333Z" fill="currentColor" transform="rotate(180 8 8)" />
+                        </svg>
+                    </button>
+                    <button class="pagination-btn" id="prevPage" onclick="goToPrevPage()">
+                        <svg viewBox="0 0 16 16">
+                            <path d="M8.7813 8.00047L5.48145 4.70062L6.42426 3.75781L10.6669 8.00047L6.42426 12.2431L5.48145 11.3003L8.7813 8.00047Z" fill="currentColor" transform="rotate(180 8 8)" />
+                        </svg>
+                    </button>
+                    <span class="page-number-text" style="padding: 8px 12px; color: #64748B; display: none;">Page <span id="currentPage">1</span> of <span id="totalPages">1</span></span>
+                    <button class="pagination-btn" id="nextPage" onclick="goToNextPage()">
+                        <svg viewBox="0 0 16 16">
+                            <path d="M8.7813 8.00047L5.48145 4.70062L6.42426 3.75781L10.6669 8.00047L6.42426 12.2431L5.48145 11.3003L8.7813 8.00047Z" fill="currentColor" />
+                        </svg>
+                    </button>
+                    <button class="pagination-btn" id="lastPage" onclick="goToLastPage()">
+                        <svg viewBox="0 0 16 16">
+                            <path d="M6.72387 8L3.52861 11.1953L4.47141 12.1381L8.60947 8L4.47141 3.86194L3.52861 4.80475L6.72387 8ZM11.3333 4.00001V12H10V4.00001H11.3333Z" fill="currentColor" />
+                        </svg>
+                    </button>
+                </div>
             </div>
 
             <div class="table-actions">
@@ -229,57 +163,7 @@
     </div>
 </div>
 
-<!-- Placeholder content for other tabs -->
-<div id="work-request-content" class="tab-content-container hidden">
-    <div class="table-container">
-        <div class="tab-content">
-            <div>
-                <h3>Work Request Management</h3>
-                <p>Work request content will be displayed here.</p>
-                <p>This would include work request forms, tracking, and management.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="pre-inspection-content" class="tab-content-container hidden">
-    <div class="table-container">
-        <div class="tab-content">
-            <div>
-                <h3>Pre-Inspection Management</h3>
-                <p>Pre-inspection forms and checklists will be displayed here.</p>
-                <p>This section manages pre-inspection processes.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="work-order-content" class="tab-content-container hidden">
-    <div class="table-container">
-        <div class="tab-content">
-            <div>
-                <h3>Work Order Management</h3>
-                <p>Work order management content will be displayed here.</p>
-                <p>This section handles work order creation, assignment, and tracking.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="invoicing-content" class="tab-content-container hidden">
-    <div class="table-container">
-        <div class="tab-content">
-            <div>
-                <h3>Invoicing Management</h3>
-                <p>Invoicing and billing content will be displayed here.</p>
-                <p>This section manages invoices, payments, and billing records.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
-    // Tab switching functionality
     document.addEventListener('DOMContentLoaded', function() {
         // Initialize pagination FIRST
         initializePagination();
@@ -469,7 +353,6 @@
         });
     }
 
-    // Export functionality
     const exportBtn = document.querySelector('.export-btn');
     if (exportBtn) {
         exportBtn.addEventListener('click', function() {
