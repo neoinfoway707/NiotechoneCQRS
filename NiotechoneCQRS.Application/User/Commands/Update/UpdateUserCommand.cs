@@ -12,10 +12,10 @@ public class UpdateUserCommand : IRequest<ResponseDTO<bool>>
     [JsonIgnore]         
     public int Id { get; set; }
     public string FullName { get; set; } = string.Empty;
-    public int UserRoleId { get; set; }
+    public int? UserRoleId { get; set; }
     public int? CompanyId { get; set; }
     public string Address { get; set; } = string.Empty;
-    public int CountryId { get; set; }
+    public int? CountryId { get; set; }
     public string Email { get; set; } = string.Empty;
     public string Phone { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
@@ -23,6 +23,7 @@ public class UpdateUserCommand : IRequest<ResponseDTO<bool>>
     //public string? Password { get; set; }
     public int StatusId { get; set; }
     public int UserTypeId { get; set; }
+    public string PasswordDecrypt { get; set; }
 }
 public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ResponseDTO<bool>>
 {

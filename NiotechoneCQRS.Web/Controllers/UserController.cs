@@ -85,7 +85,8 @@ namespace NiotechoneCQRS.Web.Controllers
                     Phone = response.data.phone,
                     StatusId = response.data.statusId,
                     UserName = response.data.userName,
-                    UserTypeId = response.data.userTypeId
+                    UserTypeId = response.data.userTypeId,
+                    PasswordDecrypt = response.data.passwordDecrypt
                 };
                 return View(userView);
             }

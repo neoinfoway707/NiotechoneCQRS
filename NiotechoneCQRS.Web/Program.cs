@@ -15,6 +15,7 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 //builder.Services.AddKendo();
+
 builder.Services.AddHttpContextAccessor();
 
 string baseUrl = builder.Configuration["baseUrl"];

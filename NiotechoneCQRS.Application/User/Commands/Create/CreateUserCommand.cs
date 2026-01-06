@@ -10,10 +10,10 @@ namespace NiotechoneCQRS.Application.User.Commands.Create;
 public class CreateUserCommand : IRequest<ResponseDTO<bool>>
 {
     public string FullName { get; set; } = string.Empty;
-    public int UserRoleId { get; set; }
+    public int? UserRoleId { get; set; }
     public int? CompanyId { get; set; }
     public string Address { get; set; } = string.Empty;
-    public int CountryId { get; set; }
+    public int? CountryId { get; set; }
     public string Email { get; set; } = string.Empty;
     public string Phone { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;

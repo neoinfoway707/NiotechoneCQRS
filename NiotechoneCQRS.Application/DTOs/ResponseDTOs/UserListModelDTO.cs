@@ -17,7 +17,7 @@ namespace NiotechoneCQRS.Application.DTOs.ResponseDTOs
         public object userRole { get; set; }
         public string address { get; set; }
         public object countryName { get; set; }
-        public int countryId { get; set; }
+        public int? countryId { get; set; }
         public string phone { get; set; }
         public string email { get; set; }
         public string description { get; set; }

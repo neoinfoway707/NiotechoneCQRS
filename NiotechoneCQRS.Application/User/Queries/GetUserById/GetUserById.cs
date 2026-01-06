@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using NiotechoneCQRS.Application.DTOs.ResponseDTOs;
 using NiotechoneCQRS.Domain.Interfaces;
 using NiotechoneCQRS.Domain.Entities;
-using NiotechoneCQRS.Utility.AppResource;
+using NiotechoneCQRS.Utility.CommonResource;
 using System;
 using System.Collections.Generic;
 using System.Linq;
