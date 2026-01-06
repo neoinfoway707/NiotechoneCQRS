@@ -14,5 +14,17 @@
         public const string CreateCompany = "create";
         public const string UpdateCompany = "update/id";
         public const string DeleteCompany = "delete";
+
+        public const string GetAllRoles = "get-all-roles";
+        public const string GetRoleById = "get-role-by-id";
+        public const string CreateRole = "create";
+        public const string UpdateRole = "update/id";
+        public const string DeleteRole = "delete";
+
+        public const string GetPermissionsByRole = "get-permissions-by-role";
+        public const string SavePermissionList = "save-permission-list";
+
+        public const string GetKpiList = "get-kpi-list";
+        public const string SaveKpiList = "save-kpi-list";
     }
 }

@@ -27,7 +27,7 @@ public class CompanyRepository : ICompanyRepository
         return companies.AsList();
     }
 
-    public async Task<Company?> GetCompanyById(int id, CancellationToken cancellationToken = default)
+    public async Task<Company?> GetCompanyById(long id, CancellationToken cancellationToken = default)
     {
         const string sql = @"
                 SELECT *

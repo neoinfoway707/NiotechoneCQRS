@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NiotechoneCQRS.Application.ApiRoutes;
 using NiotechoneCQRS.Application.DTOs.ResponseDTOs;
-using NiotechoneCQRS.Domain.Entities;
 using NiotechoneCQRS.Web.Helper;
 using NiotechoneCQRS.Web.Models;
 

@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Http
 @using NiotechoneCQRS.Application
-@using NiotechoneCQRS.Application.Enum
-@using static NiotechoneCQRS.Application.Enum.Enums
+@using NiotechoneCQRS.Domain.Enum
+@using static NiotechoneCQRS.Domain.Enum.Enums
 @using Microsoft.AspNetCore.Mvc.Rendering
 
 @{
@@ -60,6 +60,13 @@
                         <a asp-controller="User" asp-action="Index">
                             <i class="fa fa-users"></i>
                             <span>Users</span>
+                        </a>
+                    </li>
+
+                    <li class="@IsActive("UserRole")">
+                        <a asp-controller="UserRole" asp-action="Index">
+                            <i class="fa fa-user-shield"></i>
+                            <span>Roles</span>
                         </a>
                     </li>
                 }
@@ -167,14 +174,14 @@
                             <button class="back-btn">
                                 <svg viewBox="0 0 24 24" class="back-icon" fill="none">
                                     <path d="M9 6L3 12L9 18"
-                                          stroke="currentColor"
-                                          stroke-width="2.2"
-                                          stroke-linecap="round"
-                                          stroke-linejoin="round" />
+                                    stroke="currentColor"
+                                    stroke-width="2.2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round" />
                                     <path d="M21 12H4"
-                                          stroke="currentColor"
-                                          stroke-width="2.2"
-                                          stroke-linecap="round" />
+                                    stroke="currentColor"
+                                    stroke-width="2.2"
+                                    stroke-linecap="round" />
                                 </svg>
                             </button>
                         }
@@ -199,9 +206,9 @@
 
                         <form method="post">
                             <button class="avatar-btn" type="submit" asp-controller="Login" asp-action="Logout">
-                            <img src="/images/avatar.png" alt="User" />
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </button>
+                                <img src="/images/avatar.png" alt="User" />
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
                         </form>
                     </div>
 
@@ -234,9 +241,9 @@
 
     <script>
         function toggleSidebar() {
-            const sidebar = document.querySelector(".sidebar");
-            if (!sidebar) return;
-            sidebar.classList.toggle("collapsed");
+        const sidebar = document.querySelector(".sidebar");
+        if (!sidebar) return;
+        sidebar.classList.toggle("collapsed");
         }
     </script>
 

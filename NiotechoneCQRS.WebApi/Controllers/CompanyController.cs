@@ -7,7 +7,6 @@ using NiotechoneCQRS.Application.Company.Commands.Delete;
 using NiotechoneCQRS.Application.Company.Commands.Update;
 using NiotechoneCQRS.Application.Company.Queries.GetAllCompanies;
 using NiotechoneCQRS.Application.Company.Queries.GetCompanyById;
-using NiotechoneCQRS.Application.User.Commands.Delete;
 
 namespace NiotechoneCQRS.WebApi.Controllers;
 

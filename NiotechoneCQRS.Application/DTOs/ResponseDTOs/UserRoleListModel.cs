@@ -1,6 +1,14 @@
-﻿namespace NiotechoneCQRS.Domain.Entities;
+﻿namespace NiotechoneCQRS.Application.DTOs.ResponseDTOs;
 
-public class UserRole
+public class UserRoleListModel
+{
+    public bool isSuccess { get; set; }
+    public int statusCode { get; set; }
+    public object errorMessage { get; set; }
+    public List<UserRoleData> data { get; set; }
+}
+
+public class UserRoleData
 {
     public long UserRoleId { get; set; }
     public long CompanyId { get; set; }
@@ -11,8 +19,4 @@ public class UserRole
     public Nullable<System.DateTime> CreatedDate { get; set; }
     public Nullable<int> ModifiedBy { get; set; }
     public Nullable<System.DateTime> ModifiedDate { get; set; }
-
-    public virtual Company Company { get; set; }
-    public virtual ICollection<CompanyUserRoleLink> CompanyUserRoleLinks { get; set; }
-    public virtual ICollection<User> Users { get; set; }
 }

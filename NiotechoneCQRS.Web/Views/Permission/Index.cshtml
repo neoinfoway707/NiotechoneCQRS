@@ -1,0 +1,57 @@
+﻿@model UserRoleModuleOperationModel
+@using NiotechoneCQRS.Application.DTOs.ResponseDTOs
+@using NiotechoneCQRS.Domain.Enum
+
+<table border="1" width="100%" cellpadding="6" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Module Name</th>
+            <th>View</th>
+            <th>Add</th>
+            <th>Modify</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            var groupedModules = Model.data
+            .GroupBy(x => x.ModuleId)
+            .OrderBy(x => x.First().Module.Seq);
+        }
+
+        @foreach (var group in groupedModules)
+        {
+            var module = group.First().Module;
+            var padding = module.ModuleLevel.HasValue
+            ? module.ModuleLevel.Value * 20
+            : 0;
+
+            bool hasView = group.Any(x => x.OperationId == (int)Enums.OperationType.View);
+            bool hasAdd = group.Any(x => x.OperationId == (int)Enums.OperationType.Add);
+            bool hasModify = group.Any(x => x.OperationId == (int)Enums.OperationType.Modify);
+            bool hasDelete = group.Any(x => x.OperationId == (int)Enums.OperationType.Delete);
+
+            <tr>
+                <td style="padding-left:@(padding)px;">
+                    @module.ModuleName
+                </td>
+
+                <td align="center">
+                    <input type="checkbox" @(hasView ? "checked" : "") />
+                </td>
+
+                <td align="center">
+                    <input type="checkbox" @(hasAdd ? "checked" : "") />
+                </td>
+
+                <td align="center">
+                    <input type="checkbox" @(hasModify ? "checked" : "") />
+                </td>
+
+                <td align="center">
+                    <input type="checkbox" @(hasDelete ? "checked" : "") />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
