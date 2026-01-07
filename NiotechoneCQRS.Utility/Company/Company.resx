@@ -126,6 +126,9 @@
   <data name="Address" xml:space="preserve">
     <value>Address</value>
   </data>
+  <data name="AddressRequired" xml:space="preserve">
+    <value>Address is required.</value>
+  </data>
   <data name="AllowWorkRequest" xml:space="preserve">
     <value>Allow Work Request</value>
   </data>
@@ -134,6 +137,15 @@
   </data>
   <data name="City" xml:space="preserve">
     <value>City</value>
+  </data>
+  <data name="CityRequired" xml:space="preserve">
+    <value>City is required.</value>
+  </data>
+  <data name="CompanyDeleteError" xml:space="preserve">
+    <value>Cannot delete company because users exist.</value>
+  </data>
+  <data name="CompanyDeleteSuccess" xml:space="preserve">
+    <value>Company deleted successfully</value>
   </data>
   <data name="CompanyFooter" xml:space="preserve">
     <value>Company Footer</value>
@@ -150,11 +162,20 @@
   <data name="CompanyName" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="CompanyNameRequired" xml:space="preserve">
+    <value>Company Name is required.</value>
+  </data>
   <data name="Country" xml:space="preserve">
     <value>Country</value>
   </data>
+  <data name="CountryRequired" xml:space="preserve">
+    <value>Country is required.</value>
+  </data>
   <data name="Currency" xml:space="preserve">
     <value>Currency</value>
+  </data>
+  <data name="CurrencyRequired" xml:space="preserve">
+    <value>Currency is required.</value>
   </data>
   <data name="EditCompany" xml:space="preserve">
     <value>Edit Company</value>
@@ -168,8 +189,14 @@
   <data name="PhoneNo" xml:space="preserve">
     <value>Phone No.</value>
   </data>
+  <data name="PhoneRequired" xml:space="preserve">
+    <value>Phone is required.</value>
+  </data>
   <data name="POBox" xml:space="preserve">
     <value>P.O. Box</value>
+  </data>
+  <data name="POBoxRequired" xml:space="preserve">
+    <value>P.O. Box is required.</value>
   </data>
   <data name="PurchaseReqEmail" xml:space="preserve">
     <value>Purchase Request Email Addresses</value>
@@ -180,11 +207,17 @@
   <data name="TaxRegistrationNo" xml:space="preserve">
     <value>Tax Registration No.</value>
   </data>
+  <data name="ThresholdRequired" xml:space="preserve">
+    <value>Threshold Value is required.</value>
+  </data>
   <data name="ThresholdValue" xml:space="preserve">
     <value>Threshold Value</value>
   </data>
   <data name="TimeZone" xml:space="preserve">
     <value>TimeZone</value>
+  </data>
+  <data name="TimezoneRequired" xml:space="preserve">
+    <value>Time Zone is required.</value>
   </data>
   <data name="VAT" xml:space="preserve">
     <value>VAT</value>

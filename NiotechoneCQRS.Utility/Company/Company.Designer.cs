@@ -88,6 +88,15 @@ namespace NiotechoneCQRS.Utility.Company {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Address is required..
+        /// </summary>
+        public static string AddressRequired {
+            get {
+                return ResourceManager.GetString("AddressRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Allow Work Request.
         /// </summary>
         public static string AllowWorkRequest {
@@ -111,6 +120,33 @@ namespace NiotechoneCQRS.Utility.Company {
         public static string City {
             get {
                 return ResourceManager.GetString("City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City is required..
+        /// </summary>
+        public static string CityRequired {
+            get {
+                return ResourceManager.GetString("CityRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot delete company because users exist..
+        /// </summary>
+        public static string CompanyDeleteError {
+            get {
+                return ResourceManager.GetString("CompanyDeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company deleted successfully.
+        /// </summary>
+        public static string CompanyDeleteSuccess {
+            get {
+                return ResourceManager.GetString("CompanyDeleteSuccess", resourceCulture);
             }
         }
         
@@ -160,6 +196,15 @@ namespace NiotechoneCQRS.Utility.Company {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company Name is required..
+        /// </summary>
+        public static string CompanyNameRequired {
+            get {
+                return ResourceManager.GetString("CompanyNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Country.
         /// </summary>
         public static string Country {
@@ -169,11 +214,29 @@ namespace NiotechoneCQRS.Utility.Company {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Country is required..
+        /// </summary>
+        public static string CountryRequired {
+            get {
+                return ResourceManager.GetString("CountryRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Currency.
         /// </summary>
         public static string Currency {
             get {
                 return ResourceManager.GetString("Currency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency is required..
+        /// </summary>
+        public static string CurrencyRequired {
+            get {
+                return ResourceManager.GetString("CurrencyRequired", resourceCulture);
             }
         }
         
@@ -214,11 +277,29 @@ namespace NiotechoneCQRS.Utility.Company {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Phone is required..
+        /// </summary>
+        public static string PhoneRequired {
+            get {
+                return ResourceManager.GetString("PhoneRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to P.O. Box.
         /// </summary>
         public static string POBox {
             get {
                 return ResourceManager.GetString("POBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to P.O. Box is required..
+        /// </summary>
+        public static string POBoxRequired {
+            get {
+                return ResourceManager.GetString("POBoxRequired", resourceCulture);
             }
         }
         
@@ -250,6 +331,15 @@ namespace NiotechoneCQRS.Utility.Company {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Threshold Value is required..
+        /// </summary>
+        public static string ThresholdRequired {
+            get {
+                return ResourceManager.GetString("ThresholdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Threshold Value.
         /// </summary>
         public static string ThresholdValue {
@@ -264,6 +354,15 @@ namespace NiotechoneCQRS.Utility.Company {
         public static string TimeZone {
             get {
                 return ResourceManager.GetString("TimeZone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time Zone is required..
+        /// </summary>
+        public static string TimezoneRequired {
+            get {
+                return ResourceManager.GetString("TimezoneRequired", resourceCulture);
             }
         }
         

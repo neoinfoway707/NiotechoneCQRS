@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using CompanyRes = NiotechoneCQRS.Utility.Company.Company;
 
 namespace NiotechoneCQRS.Web.Models;
 
@@ -6,25 +7,25 @@ public class CompanyViewModel
 {
     public long? CompanyId { get; set; }
 
-    [Required(ErrorMessage = "Company Name is required.")]
+    [Required(ErrorMessageResourceType = typeof(CompanyRes), ErrorMessageResourceName = nameof(CompanyRes.CompanyNameRequired))]
     public string? CompanyName { get; set; }
 
-    [Required(ErrorMessage = "Address is required.")]
+    [Required(ErrorMessageResourceType = typeof(CompanyRes), ErrorMessageResourceName = nameof(CompanyRes.AddressRequired))]
     public string? Address { get; set; }
 
-    [Required(ErrorMessage = "Country is required.")]
+    [Required(ErrorMessageResourceType = typeof(CompanyRes), ErrorMessageResourceName = nameof(CompanyRes.CountryRequired))]
     public int? Country { get; set; }
 
-    [Required(ErrorMessage = "Time Zone is required.")]
+    [Required(ErrorMessageResourceType = typeof(CompanyRes), ErrorMessageResourceName = nameof(CompanyRes.TimezoneRequired))]
     public string? TimeZone { get; set; }
 
-    [Required(ErrorMessage = "City is required.")]
+    [Required(ErrorMessageResourceType = typeof(CompanyRes), ErrorMessageResourceName = nameof(CompanyRes.CityRequired))]
     public string? City { get; set; }
 
-    [Required(ErrorMessage = "P.O. Box is required.")]
+    [Required(ErrorMessageResourceType = typeof(CompanyRes), ErrorMessageResourceName = nameof(CompanyRes.POBoxRequired))]
     public string? POBox { get; set; }
 
-    [Required(ErrorMessage = "Phone is required.")]
+    [Required(ErrorMessageResourceType = typeof(CompanyRes), ErrorMessageResourceName = nameof(CompanyRes.PhoneRequired))]
     public string? Phone { get; set; }
     public bool IsActive { get; set; }
     public bool Billable { get; set; }
@@ -32,18 +33,18 @@ public class CompanyViewModel
 
     public string? WorkRequestUrl { get; set; }
 
-    [Required(ErrorMessage = "Threshold Value is required.")]
+    [Required(ErrorMessageResourceType = typeof(CompanyRes), ErrorMessageResourceName = nameof(CompanyRes.ThresholdRequired))]
     public string? ThresholdValue { get; set; }
     public string? VAT {  get; set; }
     public string? PurchaseReqEmails { get; set; }
 
-    [Required(ErrorMessage = "Currency is required.")]
+    [Required(ErrorMessageResourceType = typeof(CompanyRes), ErrorMessageResourceName = nameof(CompanyRes.CurrencyRequired))]
     public int? Currency { get; set; }
 
     public string? TaxRegistrationNo { get; set; }
 
     public IFormFile? CompanyLogo { get; set; }
-    public int Language { get; set; }
+    public int? Language { get; set; }
 
     public IFormFile? Header { get; set; }
     public IFormFile? Footer { get; set; }
