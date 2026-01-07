@@ -32,5 +32,12 @@
         public const string GetLanguageList = "language-list";
 
         public const string GetConfigByKey = "config-by-key";
+
+        public const string ConfigurationList = "configuration-list/CompanyId";
+        public const string UpdateConfigurationList = "update-configuration-list/id";
+        public const string SaveSystemConfigurationValue = "save-systemConfigurationValue";
+
+        public const string GetParameterValues = "get-parameter-values";
+        public const string GetConfigMasterByKey = "get-ConfigMasterByKey";
     }
 }

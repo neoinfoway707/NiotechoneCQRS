@@ -20,4 +20,8 @@
     <ProjectReference Include="..\NiotechoneCQRS.Utility\NiotechoneCQRS.Utility.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Parameter\Commands\" />
+  </ItemGroup>
+
 </Project>

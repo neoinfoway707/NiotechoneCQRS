@@ -9,7 +9,5 @@ public class ConfigManagerValue
     public string Remarks { get; set; }
 
     public virtual ConfigManagerKey ConfigManagerKey { get; set; }
-    public virtual ConfigManagerValue ConfigManagerValue1 { get; set; }
-    public virtual ConfigManagerValue ConfigManagerValue2 { get; set; }
     public virtual Company Company { get; set; }
 }
