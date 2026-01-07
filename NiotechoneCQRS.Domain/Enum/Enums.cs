@@ -262,4 +262,11 @@ public class Enums
         Modify = 3,
         Delete = 4
     }
+
+    public enum DeleteCompanyResult
+    {
+        Deleted,
+        HasUsers,
+        NotFound
+    }
 }

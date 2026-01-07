@@ -1076,3 +1076,23 @@ table.dataTable tbody td {
 .page-content {
     padding-top: 10px
 }
+
+.checkbox-row-master {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .checkbox-row-master label {
+        margin: 0;
+        font-weight: 500;
+        width: auto; /* 🔥 CRITICAL */
+        display: inline-flex; /* 🔥 CRITICAL */
+    }
+
+.company-logo {
+    max-width: 100px;
+    max-height: 100px;
+    display: block;
+    margin-bottom: 5px;
+}

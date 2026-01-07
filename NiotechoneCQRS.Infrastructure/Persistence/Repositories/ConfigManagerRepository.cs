@@ -19,12 +19,12 @@ public class ConfigManagerRepository : IConfigManagerRepository
         using var connection = _connectionFactory.CreateConnection();
 
         var sql = @"
-        SELECT TOP 1 cmv.*
-        FROM ConfigManagerValue cmv
-        INNER JOIN ConfigManagerKey cmk
-            ON cmk.ConfigManagerKeyId = cmv.ConfigManagerKeyId
-        WHERE cmk.[Key] = @ConfigMasterKey
-          AND cmv.CompanyId = @CompanyId";
+            SELECT TOP 1 cmv.*
+            FROM ConfigManagerValue cmv
+            INNER JOIN ConfigManagerKey cmk
+                ON cmk.ConfigManagerKeyId = cmv.ConfigManagerKeyId
+            WHERE cmk.[Key] = @ConfigMasterKey
+              AND cmv.CompanyId = @CompanyId";
 
         var configEntity = await connection.QueryFirstOrDefaultAsync<ConfigManagerValue>(
             sql,

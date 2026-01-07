@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using NiotechoneCQRS.Application.DTOs.ResponseDTOs;
 using NiotechoneCQRS.Domain.Interfaces;
-using NiotechoneCQRS.Utility.CommonResource;
 using System.Net;
 
 namespace NiotechoneCQRS.Application.Company.Commands.Delete;
@@ -27,8 +26,8 @@ public class DeleteCompanyCommandHandler : IRequestHandler<DeleteCompanyCommand,
         if (!isDeleted)
         {
             return ResponseDTO<bool>.Failure(
-                string.Format(AppResource.Notfound, "Company"),
-                (int)HttpStatusCode.NotFound
+                "Cannot delete company because users exist or company not found.",
+                (int)HttpStatusCode.Conflict
             );
         }
         return ResponseDTO<bool>.Success(isDeleted, (int)HttpStatusCode.OK);

@@ -26,5 +26,11 @@
 
         public const string GetKpiList = "get-kpi-list";
         public const string SaveKpiList = "save-kpi-list";
+
+        public const string GetAllCountries = "get-all-countries";
+        public const string GetAllCurrency = "get-all-currency";
+        public const string GetLanguageList = "language-list";
+
+        public const string GetConfigByKey = "config-by-key";
     }
 }

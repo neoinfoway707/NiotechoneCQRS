@@ -1,0 +1,406 @@
+﻿@using NiotechoneCQRS.Domain.Entities
+@using NiotechoneCQRS.Web.Models
+@using CompanyRes = NiotechoneCQRS.Utility.Company.Company
+@using CommonRes = NiotechoneCQRS.Utility.CommonResource.AppResource
+@{
+    ViewBag.PageTitle = CompanyRes.EditCompany;
+    ViewBag.ShowBackButton = true;
+    ViewBag.Breadcrumb = $"<i class='fa fa-folder'></i> {CompanyRes.CompanyList} <span class='sep'>/</span> <strong> {CompanyRes.EditCompany} </strong>";
+}
+@model CompanyViewModel
+
+@{
+    ViewData["Title"] = CompanyRes.EditCompany;
+}
+
+@{
+    var showHeaderFooter = ViewBag.ConfigForHeaderFooter?.ToString() == "1";
+}
+
+@{
+    var hasValidationError = ViewBag.IsValidationError != null && (bool)ViewBag.IsValidationError;
+}
+
+<link href="~/css/user.css" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@400;500&family=Wix+Madefor+Display&display=swap" rel="stylesheet">
+
+<div class="tab-section-master">
+    <div class="tab-master">@CompanyRes.EditCompany</div>
+</div>
+
+<form method="post" enctype="multipart/form-data" class="form-container-master disabled-form" id="companyForm">
+    <input type="hidden" asp-for="CompanyId" />
+    <div class="form-grid-master">
+        <!-- Left Column -->
+        <div class="form-column-master">
+
+            <div class="input-group-master">
+                <label>@CompanyRes.CompanyName <span class="required-star">*</span></label>
+                <div class="input-wrapper-master">
+                    <svg class="input-icon-master" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 10C11.6569 10 13 8.65685 13 7C13 5.34315 11.6569 4 10 4C8.34315 4 7 5.34315 7 7C7 8.65685 8.34315 10 10 10Z" fill="#818898" />
+                        <path d="M10 11C7.23858 11 5 13.2386 5 16V18H15V16C15 13.2386 12.7614 11 10 11Z" fill="#818898" />
+                    </svg>
+                    <input type="text" asp-for="CompanyName" placeholder="Enter Company name" disabled />
+                </div>
+                <span class="field-validation-error text-danger-master" asp-validation-for="CompanyName"></span>
+            </div>
+
+            <div class="input-group-master">
+                <label>@CompanyRes.Address <span class="required-star">*</span></label>
+                <div class="input-wrapper-master address-wrapper">
+                    <svg class="input-icon-master" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 4C7.23858 4 5 6.23858 5 9C5 11.7614 7.23858 14 10 14C12.7614 14 15 11.7614 15 9C15 6.23858 12.7614 4 10 4ZM10 12C8.34315 12 7 10.6569 7 9C7 7.34315 8.34315 6 10 6C11.6569 6 13 7.34315 13 9C13 10.6569 11.6569 12 10 12Z" fill="#818898" />
+                        <path d="M10 0C6.13401 0 3 3.13401 3 7C3 9.37868 4.29675 11.4785 6.34375 12.6562L10 15L13.6562 12.6562C15.7032 11.4785 17 9.37868 17 7C17 3.13401 13.866 0 10 0Z" fill="#818898" />
+                    </svg>
+                    <textarea asp-for="Address" placeholder="Enter address" class="address-textarea" disabled></textarea>
+                </div>
+                <span class="field-validation-error text-danger-master" asp-validation-for="Address"></span>
+            </div>
+
+            <div class="input-group-master">
+                <label>@CompanyRes.Country<span class="required-star">*</span></label>
+                <div class="input-wrapper-master">
+                    <svg class="input-icon-master" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 10C11.6569 10 13 8.65685 13 7C13 5.34315 11.6569 4 10 4C8.34315 4 7 5.34315 7 7C7 8.65685 8.34315 10 10 10Z" fill="#818898" />
+                        <path d="M10 11C7.23858 11 5 13.2386 5 16V18H15V16C15 13.2386 12.7614 11 10 11Z" fill="#818898" />
+                    </svg>
+                    <select asp-for="Country" class="form-control" disabled>
+                        <option value="">Select Country</option>
+                        @foreach (var country in ViewBag.Countries as List<Country>)
+                        {
+                            <option value="@country.CountryId">@country.CountryName</option>
+                        }
+                    </select>
+                </div>
+                <span class="field-validation-error text-danger-master" asp-validation-for="Country"></span>
+            </div>
+
+            <div class="input-group-master">
+                <label>@CompanyRes.TimeZone <span class="required-star">*</span></label>
+                <div class="input-wrapper-master">
+                    <svg class="input-icon-master" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 10C11.6569 10 13 8.65685 13 7C13 5.34315 11.6569 4 10 4C8.34315 4 7 5.34315 7 7C7 8.65685 8.34315 10 10 10Z" fill="#818898" />
+                        <path d="M10 11C7.23858 11 5 13.2386 5 16V18H15V16C15 13.2386 12.7614 11 10 11Z" fill="#818898" />
+                    </svg>
+                    <select asp-for="TimeZone" class="form-control" disabled>
+                        <option value="">Select Timezone</option>
+                        @foreach (var timezone in ViewBag.TimeZones as List<SelectListItem>)
+                        {
+                            <option value="@timezone.Value">@timezone.Text</option>
+                        }
+                    </select>
+                </div>
+                <span class="field-validation-error text-danger-master" asp-validation-for="TimeZone"></span>
+            </div>
+
+            <div class="input-group-master">
+                <label>@CompanyRes.City <span class="required-star">*</span></label>
+                <div class="input-wrapper-master">
+                    <svg class="input-icon-master" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 10C11.6569 10 13 8.65685 13 7C13 5.34315 11.6569 4 10 4C8.34315 4 7 5.34315 7 7C7 8.65685 8.34315 10 10 10Z" fill="#818898" />
+                        <path d="M10 11C7.23858 11 5 13.2386 5 16V18H15V16C15 13.2386 12.7614 11 10 11Z" fill="#818898" />
+                    </svg>
+                    <input type="text" asp-for="City" placeholder="Enter city" disabled />
+                </div>
+                <span class="field-validation-error text-danger-master" asp-validation-for="City"></span>
+            </div>
+
+            <div class="input-group-master">
+                <label>@CompanyRes.POBox <span class="required-star">*</span></label>
+                <div class="input-wrapper-master">
+                    <svg class="input-icon-master" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 10C11.6569 10 13 8.65685 13 7C13 5.34315 11.6569 4 10 4C8.34315 4 7 5.34315 7 7C7 8.65685 8.34315 10 10 10Z" fill="#818898" />
+                        <path d="M10 11C7.23858 11 5 13.2386 5 16V18H15V16C15 13.2386 12.7614 11 10 11Z" fill="#818898" />
+                    </svg>
+                    <input type="text" asp-for="POBox" placeholder="Enter PO Box" disabled />
+                </div>
+                <span class="field-validation-error text-danger-master" asp-validation-for="POBox"></span>
+            </div>
+
+            <div class="input-group-master">
+                <label>@CompanyRes.PhoneNo <span class="required-star">*</span></label>
+                <div class="input-wrapper-master phone-input-master">
+                    <input type="text" asp-for="Phone" placeholder="Enter phone number" disabled />
+                </div>
+                <span class="field-validation-error text-danger-master" asp-validation-for="Phone"></span>
+            </div>
+
+            @if (showHeaderFooter)
+            {
+                <div class="input-group-master">
+                    <label>@CompanyRes.CompanyHeader</label>
+                    <div class="input-wrapper-master">
+                        <svg class="input-icon-master" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 10C11.6569 10 13 8.65685 13 7C13 5.34315 11.6569 4 10 4C8.34315 4 7 5.34315 7 7C7 8.65685 8.34315 10 10 10Z" fill="#818898" />
+                            <path d="M10 11C7.23858 11 5 13.2386 5 16V18H15V16C15 13.2386 12.7614 11 10 11Z" fill="#818898" />
+                        </svg>
+
+                        <input type="file" asp-for="Header" disabled />
+
+                        @if (ViewBag.HeaderArtifact != null)
+                        {
+                            <img src="@ViewBag.HeaderArtifact"
+                                 alt="Header Logo"
+                                 class="company-logo" />
+                        }
+                    </div>
+                </div>
+
+                <div class="input-group-master">
+                    <label>@CompanyRes.CompanyFooter</label>
+                    <div class="input-wrapper-master">
+                        <svg class="input-icon-master" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 10C11.6569 10 13 8.65685 13 7C13 5.34315 11.6569 4 10 4C8.34315 4 7 5.34315 7 7C7 8.65685 8.34315 10 10 10Z" fill="#818898" />
+                            <path d="M10 11C7.23858 11 5 13.2386 5 16V18H15V16C15 13.2386 12.7614 11 10 11Z" fill="#818898" />
+                        </svg>
+
+                        <input type="file" asp-for="Footer" disabled />
+
+                        @if (ViewBag.FooterArtifact != null)
+                        {
+                            <img src="@ViewBag.FooterArtifact"
+                                 alt="Footer Logo"
+                                 class="company-logo" />
+                        }
+                    </div>
+                </div>
+            }
+
+        </div>
+
+        <!-- Right Column -->
+        <div class="form-column-master">
+            <div class="input-group-master">
+                <div class="checkbox-row-master">
+                    <label>@CompanyRes.IsActive</label>
+                    <input type="checkbox" asp-for="IsActive" id="StatusActive" disabled />
+                </div>
+            </div>
+
+            <div class="input-group-master">
+                <div class="checkbox-row-master">
+                    <label>@CompanyRes.Billable</label>
+                    <input type="checkbox" asp-for="Billable" id="IsBillable" disabled />
+                </div>
+            </div>
+
+            <div class="input-group-master">
+                <div class="checkbox-row-master">
+                    <label>@CompanyRes.AllowWorkRequest</label>
+                    <input type="checkbox" asp-for="WorkRequest" id="IsWorkRequestAllowed" disabled />
+                </div>
+            </div>
+
+            <div class="input-group-master">
+                <label>@CompanyRes.WorkRequestUrl</label>
+                <div class="input-wrapper-master">
+                    <svg class="input-icon-master" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 10C11.6569 10 13 8.65685 13 7C13 5.34315 11.6569 4 10 4C8.34315 4 7 5.34315 7 7C7 8.65685 8.34315 10 10 10Z" fill="#818898" />
+                        <path d="M10 11C7.23858 11 5 13.2386 5 16V18H15V16C15 13.2386 12.7614 11 10 11Z" fill="#818898" />
+                    </svg>
+                    <input type="text" asp-for="WorkRequestUrl" placeholder="Enter Work Request Url" disabled />
+                </div>
+            </div>
+
+            <div class="input-group-master">
+                <label>@CompanyRes.Currency <span class="required-star">*</span></label>
+                <div class="input-wrapper-master">
+                    <svg class="input-icon-master" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 10C11.6569 10 13 8.65685 13 7C13 5.34315 11.6569 4 10 4C8.34315 4 7 5.34315 7 7C7 8.65685 8.34315 10 10 10Z" fill="#818898" />
+                        <path d="M10 11C7.23858 11 5 13.2386 5 16V18H15V16C15 13.2386 12.7614 11 10 11Z" fill="#818898" />
+                    </svg>
+                    <select asp-for="Currency" class="form-control" disabled>
+                        <option value="">Select Currency</option>
+                        @foreach (var currency in ViewBag.Currency as List<ParameterValue>)
+                        {
+                            <option value="@currency.ParameterValuesId">@currency.Name</option>
+                        }
+                    </select>
+                </div>
+                <span class="field-validation-error text-danger-master" asp-validation-for="Currency"></span>
+            </div>
+
+            <div class="input-group-master">
+                <label>@CompanyRes.ThresholdValue <span class="required-star">*</span></label>
+                <div class="input-wrapper-master">
+                    <svg class="input-icon-master" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 10C11.6569 10 13 8.65685 13 7C13 5.34315 11.6569 4 10 4C8.34315 4 7 5.34315 7 7C7 8.65685 8.34315 10 10 10Z" fill="#818898" />
+                        <path d="M10 11C7.23858 11 5 13.2386 5 16V18H15V16C15 13.2386 12.7614 11 10 11Z" fill="#818898" />
+                    </svg>
+                    <input type="text" asp-for="ThresholdValue" disabled />
+                </div>
+                <span class="field-validation-error text-danger-master" asp-validation-for="ThresholdValue"></span>
+            </div>
+
+            <div class="input-group-master">
+                <label>@CompanyRes.VAT</label>
+                <div class="input-wrapper-master">
+                    <svg class="input-icon-master" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 10C11.6569 10 13 8.65685 13 7C13 5.34315 11.6569 4 10 4C8.34315 4 7 5.34315 7 7C7 8.65685 8.34315 10 10 10Z" fill="#818898" />
+                        <path d="M10 11C7.23858 11 5 13.2386 5 16V18H15V16C15 13.2386 12.7614 11 10 11Z" fill="#818898" />
+                    </svg>
+                    <input type="text" asp-for="VAT" disabled />
+                </div>
+            </div>
+
+            <div class="input-group-master">
+                <label>@CompanyRes.TaxRegistrationNo</label>
+                <div class="input-wrapper-master">
+                    <svg class="input-icon-master" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 10C11.6569 10 13 8.65685 13 7C13 5.34315 11.6569 4 10 4C8.34315 4 7 5.34315 7 7C7 8.65685 8.34315 10 10 10Z" fill="#818898" />
+                        <path d="M10 11C7.23858 11 5 13.2386 5 16V18H15V16C15 13.2386 12.7614 11 10 11Z" fill="#818898" />
+                    </svg>
+                    <input type="text" asp-for="TaxRegistrationNo" disabled />
+                </div>
+            </div>
+
+            <div class="input-group-master">
+                <label>@CompanyRes.Language</label>
+                <div class="input-wrapper-master">
+                    <svg class="input-icon-master" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 10C11.6569 10 13 8.65685 13 7C13 5.34315 11.6569 4 10 4C8.34315 4 7 5.34315 7 7C7 8.65685 8.34315 10 10 10Z" fill="#818898" />
+                        <path d="M10 11C7.23858 11 5 13.2386 5 16V18H15V16C15 13.2386 12.7614 11 10 11Z" fill="#818898" />
+                    </svg>
+                    <select asp-for="Language" class="form-control" disabled>
+                        <option value="">Select Language</option>
+                        @foreach (var language in ViewBag.Language as List<SelectListItem>)
+                        {
+                            <option value="@language.Value">@language.Text</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="input-group-master">
+                <label>@CompanyRes.PurchaseReqEmail</label>
+                <div class="input-wrapper-master">
+                    <svg class="input-icon-master" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 10C11.6569 10 13 8.65685 13 7C13 5.34315 11.6569 4 10 4C8.34315 4 7 5.34315 7 7C7 8.65685 8.34315 10 10 10Z" fill="#818898" />
+                        <path d="M10 11C7.23858 11 5 13.2386 5 16V18H15V16C15 13.2386 12.7614 11 10 11Z" fill="#818898" />
+                    </svg>
+                    <input type="text" asp-for="PurchaseReqEmails" disabled />
+                </div>
+            </div>
+
+            <div class="input-group-master">
+                <label>@CompanyRes.CompanyLogo</label>
+                <div class="input-wrapper-master">
+                    <svg class="input-icon-master" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 10C11.6569 10 13 8.65685 13 7C13 5.34315 11.6569 4 10 4C8.34315 4 7 5.34315 7 7C7 8.65685 8.34315 10 10 10Z" fill="#818898" />
+                        <path d="M10 11C7.23858 11 5 13.2386 5 16V18H15V16C15 13.2386 12.7614 11 10 11Z" fill="#818898" />
+                    </svg>
+                    <!-- File upload input -->
+                    <input type="file" asp-for="CompanyLogo" disabled />
+                    @if (ViewBag.ExistingLogo != null)
+                    {
+                        <img src="@ViewBag.ExistingLogo"
+                             alt="Company Logo"
+                             class="company-logo" />
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="btn-group-master">
+        <!-- Edit Button (shown initially) -->
+        <button type="button" class="btn-primary-master" id="editButton">
+            <svg viewBox="0 0 20 20" fill="white" width="16" height="16">
+                <path d="M12.3 3.7L16.3 7.7L5.5 18.5H1.5V14.5L12.3 3.7ZM14.9 2.3L16.3 3.7L17.7 2.3C18.1 1.9 18.1 1.3 17.7 0.9L16.1 0.3C15.7 -0.1 15.1 -0.1 14.7 0.3L14.9 2.3Z" fill="white" />
+            </svg>
+            @CommonRes.Edit
+        </button>
+
+        <!-- Save Button (hidden initially, shown after clicking Edit) -->
+        <button type="submit" class="btn-primary-master" id="saveButton">
+            <svg viewBox="0 0 20 20" fill="white" width="16" height="16">
+                <path d="M16.7071 5.70711C17.0976 5.31658 17.0976 4.68342 16.7071 4.29289C16.3166 3.90237 15.6834 3.90237 15.2929 4.29289L8 11.5858L4.70711 8.29289C4.31658 7.90237 3.68342 7.90237 3.29289 8.29289C2.90237 8.68342 2.90237 9.31658 3.29289 9.70711L7.29289 13.7071C7.68342 14.0976 8.31658 14.0976 8.70711 13.7071L16.7071 5.70711Z" fill="white" />
+            </svg>
+            @CommonRes.Save
+        </button>
+
+        <a asp-action="Index" asp-controller="Company" class="btn-secondary-master">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                <path d="M4.29289 4.29289C4.68342 3.90237 5.31658 3.90237 5.70711 4.29289L10 8.58579L14.2929 4.29289C14.6834 3.90237 15.3166 3.90237 15.7071 4.29289C16.0976 4.68342 16.0976 5.31658 15.7071 5.70711L11.4142 10L15.7071 14.2929C16.0976 14.6834 16.0976 15.3166 15.7071 15.7071C15.3166 16.0976 14.6834 16.0976 14.2929 15.7071L10 11.4142L5.70711 15.7071C5.31658 16.0976 4.68342 16.0976 4.29289 15.7071C3.90237 15.3166 3.90237 14.6834 4.29289 14.2929L8.58579 10L4.29289 5.70711C3.90237 5.31658 3.90237 4.68342 4.29289 4.29289Z" fill="currentColor" />
+            </svg>
+            @CommonRes.Cancel
+        </a>
+    </div>
+</form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const companyForm = document.getElementById('companyForm');
+        const editButton = document.getElementById('editButton');
+        const saveButton = document.getElementById('saveButton');
+        const form = document.getElementById('companyForm');
+
+        // 🎯 Hide validation error on focus
+        form.addEventListener('focusin', function (e) {
+            const target = e.target;
+
+            if (target.matches('input, select, textarea')) {
+                const inputGroup = target.closest('.input-group-master');
+
+                if (!inputGroup) return;
+
+                const errorSpan = inputGroup.querySelector('.field-validation-error, .text-danger-master');
+
+                if (errorSpan) {
+                    errorSpan.style.display = 'none';
+                }
+            }
+        });
+
+        const hasValidationError = @hasValidationError.ToString().ToLower();
+
+        // ✅ If validation failed, KEEP FORM ENABLED
+        if (hasValidationError) {
+            enableForm();
+            editButton.style.display = 'none';
+            saveButton.style.display = 'inline-flex';
+            return;
+        }
+
+        // Existing logic
+        if (isEditModeFromList()) {
+            enableForm();
+            editButton.style.display = 'none';
+            saveButton.style.display = 'inline-flex';
+        }
+
+        editButton.addEventListener('click', function () {
+            enableForm();
+            editButton.style.display = 'none';
+            saveButton.style.display = 'inline-flex';
+        });
+
+        function enableForm() {
+            companyForm.classList.remove('disabled-form');
+            companyForm.classList.add('enabled-form');
+
+            const inputs = companyForm.querySelectorAll(
+                'input:not([type="hidden"]):not([readonly]), select, textarea'
+            );
+
+            inputs.forEach(input => input.disabled = false);
+
+            companyForm.querySelectorAll('input[type="checkbox"], input[type="radio"]')
+                .forEach(el => el.disabled = false);
+
+            const firstEditable = companyForm.querySelector(
+                'input:not([disabled]):not([type="hidden"]), select, textarea'
+            );
+            if (firstEditable) firstEditable.focus();
+        }
+    });
+
+    function isEditModeFromList() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('mode') === 'edit';
+    }
+</script>
