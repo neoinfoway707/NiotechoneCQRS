@@ -8,4 +8,6 @@ public class CompanyLogo
     public string FileName { get; set; }
     public byte[] CompanyImage { get; set; }
     public string ContentType { get; set; }
+
+    public Company Company { get; set; }
 }

@@ -1,6 +1,14 @@
-﻿namespace NiotechoneCQRS.Domain.Entities;
+﻿namespace NiotechoneCQRS.Application.DTOs.ResponseDTOs;
 
-public class Company
+public class CompanyListModelDTO
+{
+    public bool isSuccess { get; set; }
+    public int statusCode { get; set; }
+    public object errorMessage { get; set; }
+    public List<CompanyData> data { get; set; }
+}
+
+public class CompanyData
 {
     public long CompanyId { get; set; }
     public string CompanyName { get; set; }
@@ -38,12 +46,4 @@ public class Company
     public Nullable<decimal> VAT { get; set; }
     public string TaxRegistrationNo { get; set; }
     public Nullable<int> NoOfClients { get; set; }
-
-    public virtual Country Country { get; set; }
-    public virtual ICollection<CompanyArtifact> CompanyArtifacts { get; set; }
-    public virtual ICollection<UserRole> UserRoles { get; set; }
-    public virtual ICollection<User> Users { get; set; }
-    public virtual ICollection<ConfigManagerValue> ConfigManagerValues { get; set; }
-    public virtual ICollection<KPIAllocation> KPIAllocations { get; set; }
-    public virtual ICollection<CompanyLogo> CompanyLogos { get; set; }
 }

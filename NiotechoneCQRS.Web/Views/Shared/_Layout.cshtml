@@ -3,9 +3,14 @@
 @using NiotechoneCQRS.Domain.Enum
 @using static NiotechoneCQRS.Domain.Enum.Enums
 @using Microsoft.AspNetCore.Mvc.Rendering
+@inject IHttpContextAccessor HttpContextAccessor
 
 @{
     var userRoleId = Context.Session.GetInt32("UserRoleId");
+}
+
+@{
+    int? companyId = HttpContextAccessor.HttpContext?.Session.GetInt32("CompanyId");
 }
 
 <!DOCTYPE html>
@@ -56,19 +61,22 @@
                         </a>
                     </li>
 
-                    <li class="@IsActive("User")">
-                        <a asp-controller="User" asp-action="Index">
-                            <i class="fa fa-users"></i>
-                            <span>Users</span>
-                        </a>
-                    </li>
+                    @if (companyId.HasValue && companyId > 0)
+                    {
+                        <li class="@IsActive("User")">
+                            <a asp-controller="User" asp-action="Index">
+                                <i class="fa fa-users"></i>
+                                <span>Users</span>
+                            </a>
+                        </li>
 
-                    <li class="@IsActive("UserRole")">
-                        <a asp-controller="UserRole" asp-action="Index">
-                            <i class="fa fa-user-shield"></i>
-                            <span>Roles</span>
-                        </a>
-                    </li>
+                        <li class="@IsActive("UserRole")">
+                            <a asp-controller="UserRole" asp-action="Index">
+                                <i class="fa fa-user-shield"></i>
+                                <span>Roles</span>
+                            </a>
+                        </li>
+                    }
                 }
                 else
                 {

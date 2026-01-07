@@ -29,18 +29,47 @@ public class CompanyRepository : ICompanyRepository
 
     public async Task<Company?> GetCompanyById(long id, CancellationToken cancellationToken = default)
     {
-        const string sql = @"
-                SELECT *
-                FROM [Company]
-                WHERE CompanyId = @CompanyId;
-            ";
+        const string companySql = @"
+            SELECT *
+            FROM [Company]
+            WHERE CompanyId = @CompanyId;
+        ";
+
+        const string logoSql = @"
+            SELECT *
+            FROM [CompanyLogo]
+            WHERE CompanyId = @CompanyId;
+        ";
+
+        const string artifactSql = @"
+            SELECT *
+            FROM [CompanyArtifacts]
+            WHERE CompanyId = @CompanyId;
+        ";
 
         using var connection = _connectionFactory.CreateConnection();
 
-        return await connection.QueryFirstOrDefaultAsync<Company>(
-            sql,
+        var company = await connection.QueryFirstOrDefaultAsync<Company>(
+            companySql,
             new { CompanyId = id }
         );
+
+        if (company != null)
+        {
+            var logos = await connection.QueryAsync<CompanyLogo>(
+                logoSql,
+                new { CompanyId = id }
+            );
+            company.CompanyLogos = logos.ToList();
+
+            var artifacts = await connection.QueryAsync<CompanyArtifact>(
+                artifactSql,
+                new { CompanyId = id }
+            );
+            company.CompanyArtifacts = artifacts.ToList();
+        }
+
+        return company;
     }
 
     public async Task<bool> CreateCompany(Company company, CompanyLogo? companyLogo, CancellationToken cancellationToken = default)
@@ -313,15 +342,55 @@ public class CompanyRepository : ICompanyRepository
 
     public async Task<bool> DeleteCompany(int id, CancellationToken cancellationToken = default)
     {
-        const string sql = @"
-                DELETE FROM Company
-                WHERE CompanyId = @CompanyId;
-            ";
         using var connection = _connectionFactory.CreateConnection();
-        var rowsAffected = await connection.ExecuteAsync(
-            sql,
-            new { CompanyId = id }
-        );
-        return rowsAffected > 0;
+        connection.Open();
+
+        using var transaction = connection.BeginTransaction();
+
+        try
+        {
+            var userCount = await connection.ExecuteScalarAsync<int>(
+                @"SELECT COUNT(1)
+              FROM Users
+              WHERE CompanyId = @CompanyId",
+                new { CompanyId = id },
+                transaction
+            );
+
+            if (userCount > 0)
+            {
+                transaction.Rollback();
+                return false;
+            }
+
+            // 2️⃣ Delete dependent records
+            //await connection.ExecuteAsync(
+            //    "DELETE FROM UOMs WHERE CompanyId = @CompanyId",
+            //    new { CompanyId = id },
+            //    transaction
+            //);
+
+            //await connection.ExecuteAsync(
+            //    "DELETE FROM CustomFields WHERE CompanyId = @CompanyId",
+            //    new { CompanyId = id },
+            //    transaction
+            //);
+
+            // 3️⃣ Delete company
+            var rowsAffected = await connection.ExecuteAsync(
+                @"DELETE FROM Company
+              WHERE CompanyId = @CompanyId",
+                new { CompanyId = id },
+                transaction
+            );
+
+            transaction.Commit();
+            return rowsAffected > 0;
+        }
+        catch
+        {
+            transaction.Rollback();
+            throw;
+        }
     }
 }

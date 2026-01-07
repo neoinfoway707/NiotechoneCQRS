@@ -18,6 +18,7 @@ public static class DependencyInjection
         services.AddScoped<IUserRoleRepository, UserRoleRepository>();
         services.AddScoped<IPermissionRepository, PermissionRepository>();
         services.AddScoped<IConfigManagerRepository, ConfigManagerRepository>();
+        services.AddScoped<ICountryRepository, CountryRepository>();
         services.AddScoped<ISettingRepository, SettingRepository>();
         services.AddScoped<IParameterRepository, ParameterRepository>();
     }
