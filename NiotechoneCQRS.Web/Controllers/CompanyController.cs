@@ -1,17 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NiotechoneCQRS.Application.ApiRoutes;
 using NiotechoneCQRS.Application.DTOs.ResponseDTOs;
 using NiotechoneCQRS.Domain.Entities;
-using NiotechoneCQRS.Domain.Enum;
-using NiotechoneCQRS.Utility.Company;
 using NiotechoneCQRS.Web.Helper;
 using NiotechoneCQRS.Web.Models;
-using System;
-using System.Collections.ObjectModel;
-using System.Globalization;
 using static NiotechoneCQRS.Domain.Enum.Enums;
+using CompanyRes = NiotechoneCQRS.Utility.Company.Company;
 
 namespace NiotechoneCQRS.Web.Controllers;
 
@@ -232,11 +227,11 @@ public class CompanyController : Controller
 
         if (!isDeleted)
         {
-            TempData["Error"] = "Cannot delete company because users exist.";
+            TempData["Error"] = CompanyRes.CompanyDeleteError;
             return RedirectToAction("Index", "Company");
         }
 
-        TempData["Success"] = "Company deleted successfully";
+        TempData["Success"] = CompanyRes.CompanyDeleteSuccess;
         return RedirectToAction("Index", "Company");
     }
 
