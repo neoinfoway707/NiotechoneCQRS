@@ -21,7 +21,7 @@
     <div class="tab-master">@CompanyRes.AddCompany</div>
 </div>
 
-<form method="post" enctype="multipart/form-data" class="form-container-master">
+<form method="post" enctype="multipart/form-data" class="form-container-master" id="companyForm">
     <div class="form-grid-master">
         <!-- Left Column -->
         <div class="form-column-master">
@@ -35,7 +35,7 @@
                     </svg>
                     <input type="text" asp-for="CompanyName" placeholder="Enter Company name" />
                 </div>
-                <span class="text-danger-master" asp-validation-for="CompanyName"></span>
+                <span class="field-validation-error text-danger-master" asp-validation-for="CompanyName"></span>
             </div>
 
             <div class="input-group-master">
@@ -47,7 +47,7 @@
                     </svg>
                     <textarea asp-for="Address" placeholder="Enter address" class="address-textarea"></textarea>
                 </div>
-                <span class="text-danger-master" asp-validation-for="Address"></span>
+                <span class="field-validation-error text-danger-master" asp-validation-for="Address"></span>
             </div>
 
             <div class="input-group-master">
@@ -65,7 +65,7 @@
                         }
                     </select>
                 </div>
-                <span class="text-danger-master" asp-validation-for="Country"></span>
+                <span class="field-validation-error text-danger-master" asp-validation-for="Country"></span>
             </div>
 
             <div class="input-group-master">
@@ -83,7 +83,7 @@
                         }
                     </select>
                 </div>
-                <span class="text-danger-master" asp-validation-for="TimeZone"></span>
+                <span class="field-validation-error text-danger-master" asp-validation-for="TimeZone"></span>
             </div>
 
             <div class="input-group-master">
@@ -95,7 +95,7 @@
                     </svg>
                     <input type="text" asp-for="City" placeholder="Enter city" />
                 </div>
-                <span class="text-danger-master" asp-validation-for="City"></span>
+                <span class="field-validation-error text-danger-master" asp-validation-for="City"></span>
             </div>
 
             <div class="input-group-master">
@@ -107,7 +107,7 @@
                     </svg>
                     <input type="text" asp-for="POBox" placeholder="Enter PO Box" />
                 </div>
-                <span class="text-danger-master" asp-validation-for="POBox"></span>
+                <span class="field-validation-error text-danger-master" asp-validation-for="POBox"></span>
             </div>
 
             <div class="input-group-master">
@@ -115,7 +115,7 @@
                 <div class="input-wrapper-master phone-input-master">
                     <input type="text" asp-for="Phone" placeholder="Enter phone number" />
                 </div>
-                <span class="text-danger-master" asp-validation-for="Phone"></span>
+                <span class="field-validation-error text-danger-master" asp-validation-for="Phone"></span>
             </div>
         </div>
 
@@ -168,7 +168,7 @@
                         }
                     </select>
                 </div>
-                <span class="text-danger-master" asp-validation-for="Currency"></span>
+                <span class="field-validation-error text-danger-master" asp-validation-for="Currency"></span>
             </div>
 
             <div class="input-group-master">
@@ -180,7 +180,7 @@
                     </svg>
                     <input type="text" asp-for="ThresholdValue"/>
                 </div>
-                <span class="text-danger-master" asp-validation-for="ThresholdValue"></span>
+                <span class="field-validation-error text-danger-master" asp-validation-for="ThresholdValue"></span>
             </div>
 
             <div class="input-group-master">
@@ -262,4 +262,30 @@
         </a>
     </div>
 </form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const form = document.getElementById('companyForm');
+
+        form.addEventListener('focusin', function (e) {
+            const field = e.target;
+
+            if (!field.matches('input, select, textarea')) return;
+
+            // Find validation span linked to this field
+            const fieldName = field.getAttribute('name');
+            if (!fieldName) return;
+
+            const errorSpan = form.querySelector(
+                `span[data-valmsg-for="${fieldName}"]`
+            );
+
+            if (errorSpan) {
+                errorSpan.style.display = 'none';
+            }
+        });
+
+    });
+</script>
 
